@@ -1,0 +1,77 @@
+{
+  "_comment": "BRSR qualitative disclosure configuration. Fill in all fields before publishing the report. This file is read by brsr_report.py at report-generation time.",
+  "organization": {
+    "name": "[Your Organization Name]",
+    "cin": "[Corporate Identification Number]",
+    "registered_address": "[Registered Office Address]",
+    "website": "[www.yourcompany.com]",
+    "reporting_fy": "FY2024-25",
+    "contact_person": "[Name and designation of the person responsible for BRSR disclosure]",
+    "contact_email": "[email@company.com]"
+  },
+  "sebi_category": "Listed — BSE/NSE",
+  "principles": {
+    "p1": {
+      "policy_title": "Business Ethics, Transparency & Accountability",
+      "policy_status": "adopted",
+      "committee": "Audit & Ethics Committee",
+      "board_coverage_pct": 100,
+      "awareness_programs": 18,
+      "complaints_received": 6,
+      "complaints_resolved": 6,
+      "notes": "Anti-bribery, conflict-of-interest and whistleblower policies adopted; zero unresolved complaints in FY2024-25."
+    },
+    "p2": {
+      "policy_title": "Sustainable & Safe Products / Services",
+      "policy_status": "not-adopted",
+      "committee": null,
+      "notes": "R&D / Product safety policy under development."
+    },
+    "p3": {
+      "policy_title": "Employee & Worker Well-Being",
+      "policy_status": "adopted",
+      "committee": "[HR Committee]",
+      "board_coverage_pct": 100,
+      "notes": "Quantitative workforce and training data pending (see BRSR_Workforce_Dataset template)."
+    },
+    "p4": {
+      "policy_title": "Stakeholder Responsiveness",
+      "policy_status": "in-progress",
+      "committee": null,
+      "notes": "Stakeholder engagement mapping in progress."
+    },
+    "p5": {
+      "policy_title": "Human Rights",
+      "policy_status": "in-progress",
+      "committee": "[CSR Committee]",
+      "notes": "Human rights due diligence framework under review."
+    },
+    "p6": {
+      "policy_title": "Environment Protection",
+      "policy_status": "adopted",
+      "committee": "[Environmental Management Committee]",
+      "board_coverage_pct": 100,
+      "notes": "Quantitative P6 data is live from GRI datasets (energy, water, GHG, waste)."
+    },
+    "p7": {
+      "policy_title": "Responsible Policy Advocacy",
+      "policy_status": "not-adopted",
+      "committee": null,
+      "notes": "Lobbying and policy advocacy register not yet established."
+    },
+    "p8": {
+      "policy_title": "Inclusive Growth & Equitable Development (CSR)",
+      "policy_status": "adopted",
+      "committee": "[CSR Committee]",
+      "csr_obligation_cr": null,
+      "csr_spent_cr": null,
+      "notes": "CSR financial data pending ingestion."
+    },
+    "p9": {
+      "policy_title": "Consumer Responsibility",
+      "policy_status": "in-progress",
+      "committee": null,
+      "notes": "Consumer complaint data not yet available."
+    }
+  }
+}

@@ -1,0 +1,404 @@
+INFO:     127.0.0.1:50445 - "GET /api/environment/energy?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/environment/water?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/environment/ghg?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/environment/energy?view=monthly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/social/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/social/development HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/sasb/hazardous-waste?view=monthly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/sasb/process-safety?view=monthly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49679 - "GET /api/environment/water?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58234 - "GET /api/environment/ghg?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58236 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58238 - "GET /api/environment/energy?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58240 - "GET /api/social/safety?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58242 - "GET /api/social/development HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58244 - "GET /api/sasb/hazardous-waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58246 - "GET /api/sasb/process-safety?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49670 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49670 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58871 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58625 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58625 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62356 - "GET /api/insights/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62356 - "GET /api/outliers/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62356 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60892 - "GET /api/filters?domain=safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64865 - "GET /api/insights/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61356 - "GET /api/outliers/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62356 - "GET /api/social/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62356 - "GET /api/social/safety HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/social/development HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/social/development HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63601 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63601 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59180 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63601 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63282 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50810 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50810 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50810 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50810 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49677 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51331 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65235 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65235 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49376 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64864 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49376 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64864 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54523 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54523 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65234 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65234 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65234 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65234 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56104 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56104 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56104 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59908 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56104 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55594 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59668 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59908 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56874 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56874 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56874 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56874 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54573 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54573 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57611 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57611 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57611 - "GET /api/reports/library HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57611 - "GET /api/reports/library HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57611 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57611 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57611 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57652 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49379 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49379 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65371 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61289 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61289 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65371 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62367 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62367 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62367 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62367 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60626 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60626 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60626 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56292 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60626 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60777 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49672 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49672 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56266 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56266 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50250 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50250 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63386 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55840 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51426 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50250 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55840 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63386 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65323 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65323 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65323 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65323 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65323 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52782 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56632 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63862 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63862 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55239 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55239 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60806 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49671 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57793 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60806 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55239 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57793 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60426 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55431 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58245 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58245 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58245 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59623 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56197 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58245 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56197 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58245 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64827 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64827 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49672 - "GET /api/environment/water?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62583 - "GET /api/filters?domain=waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62516 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62516 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56755 - "GET /api/insights/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50632 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56755 - "GET /api/insights/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50632 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53528 - "GET /api/insights/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53528 - "GET /api/insights/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/sasb/hazardous-waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/sasb/hazardous-waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62227 - "GET /api/outliers/waste HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "GET /api/insights/waste?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "GET /api/insights/waste?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53528 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "GET /api/environment/waste?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58108 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58108 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58442 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58108 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52067 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51962 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52067 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51962 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62061 - "GET /api/sasb/kpis?year=all&plant=all&region=all HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:62064 - "GET /api/sasb/kpis?year=all&plant=all&region=all HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:50498 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54644 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54646 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54647 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54648 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57889 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57889 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59702 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59702 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56273 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63846 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49792 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59702 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63846 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56273 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55585 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63393 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55585 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61033 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54404 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51892 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55234 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55234 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52337 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52337 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61585 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50193 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52337 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61585 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50193 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59729 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61585 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59729 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52337 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59729 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52337 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55234 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55234 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56794 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49889 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49889 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59694 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53803 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59694 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57457 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57457 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53803 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53803 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57457 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53803 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59694 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59694 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49889 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49889 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61492 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50787 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54705 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54705 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54566 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54566 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63212 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58774 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54566 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63212 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62796 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49234 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52889 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52889 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60053 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56716 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53373 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60053 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52889 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56716 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65363 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65363 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60575 - "GET /api/insights/water?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57109 - "GET /api/environment/water?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65363 - "GET /api/insights/water?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50499 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60575 - "GET /api/environment/water?view=yearly HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50499 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52871 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50499 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57508 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "GET /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "OPTIONS /api/chats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57508 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53290 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50697 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50697 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57155 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50697 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52579 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51306 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51414 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52579 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51306 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51414 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51414 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51414 - "POST /api/chats HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55801 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55801 - "GET /api/reports/templates?framework=GRI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55975 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55975 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50229 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50229 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64427 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51127 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64427 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50229 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59557 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55562 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55562 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49670 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55562 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56948 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56948 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52152 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52152 - "GET /api/outliers HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57183 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57183 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59916 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59916 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50583 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57795 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53691 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59916 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57795 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/kpi-correlations/water_withdrawn HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59916 - "GET /api/kpi-correlations/water_consumed HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52698 - "GET /api/kpi-correlations/water_withdrawn HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59916 - "GET /api/kpi-correlations/water_consumed HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52698 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57795 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59916 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57795 - "GET /api/insights/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50583 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53691 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52698 - "GET /api/environment/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53691 - "GET /api/outliers/water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/alerts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54099 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/alerts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54099 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54099 - "GET /api/alerts?domain=water HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54632 - "GET /api/alerts/config HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54632 - "GET /api/alerts/config HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54632 - "OPTIONS /api/alerts/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54632 - "PUT /api/alerts/config HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54632 - "PUT /api/alerts/config HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58280 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58280 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53256 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58892 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52258 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53256 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65038 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58280 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52258 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53256 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61159 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61159 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52518 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52518 - "GET /api/social/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54660 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59886 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52690 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52518 - "GET /api/environment/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61159 - "GET /api/brsr/kpis?fy=FY2024-25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52690 - "GET /api/sasb/kpis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61159 - "GET /api/alerts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61159 - "GET /api/alerts HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52690 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52690 - "GET /api/filters?domain=water HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52690 - "GET /api/alerts?domain=water HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55490 - "GET /api/alerts?domain=waste HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55490 - "GET /api/alerts?domain=energy HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55490 - "GET /api/alerts?domain=emissions HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55490 - "GET /api/alerts?domain=safety HTTP/1.1" 404 Not Found

@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "description": "Structured GRI disclosure requirements for GRI 302, 303, 305, 306, 403. Each disclosure lists its status, the dataset columns required, and any known data gaps.",
+    "statuses": {
+      "implemented":      "Disclosed and sourced from dataset columns",
+      "computed":         "Derived/calculated from existing dataset columns",
+      "narrative_gap":    "Required qualitative management narrative — cannot be auto-generated from data",
+      "data_gap":         "Requires dataset column(s) that do not currently exist",
+      "partial":          "Some years or sub-items present; others absent"
+    }
+  },
+
+  "GRI_302": {
+    "standard": "GRI 302: Energy 2016",
+    "disclosures": {
+      "302_management": {
+        "title": "Management approach — Energy",
+        "status": "narrative_gap",
+        "notes": "Requires energy policy, reduction targets, and renewable energy commitment narrative. Rendered as narrative placeholder table in reports."
+      },
+      "302_1": {
+        "title": "Energy consumption within the organization",
+        "status": "implemented",
+        "dataset": "energy_data",
+        "columns": ["OilNonProdGJ", "NaturalGasNonProdGJ", "ElectricityConsumedGJ", "SteamConsumedGJ", "TailGasConsumedGJ", "CompressedAirGJ", "HotWaterConsumedGJ", "TotalEnergyConsumedGJ", "ElectricitySoldGJ", "TailGasSoldGJ", "HotWaterSoldGJ", "SteamSoldGJ", "TotalEnergySoldGJ", "NetEnergyGJ", "ElectricityRenewableGJ", "ElectricityNonRenewableGJ", "RenewableElectricityPct", "EnergyIntensityGJpert"],
+        "notes": "Conversion factors: 780 MKCal for power; 4.187 MKCal to GJ. Site-specific GCV for natural gas."
+      },
+      "302_2": {
+        "title": "Energy consumption outside the organization",
+        "status": "implemented",
+        "dataset": "energy_data",
+        "columns": ["UpstreamEnergyGJ", "DownstreamEnergyGJ", "UpstreamEnergyIntensityGJpert", "DownstreamEnergyIntensityGJpert"],
+        "notes": "Scope 3 categories 1, 3, 4, 9."
+      },
+      "302_3": {
+        "title": "Energy intensity",
+        "status": "implemented",
+        "dataset": "energy_data",
+        "columns": ["EnergyIntensityGJpert"],
+        "notes": "Intensity ratio: GJ per production tonne."
+      },
+      "302_4": {
+        "title": "Reduction of energy consumption",
+        "status": "computed",
+        "dataset": "energy_data",
+        "columns": ["TotalEnergyConsumedGJ", "EnergyIntensityGJpert"],
+        "notes": "Computed as baseline-year (first available year) minus current year. Initiative-specific attribution requires manual input."
+      },
+      "302_5": {
+        "title": "Reductions in energy requirements of products and services",
+        "status": "narrative_gap",
+        "notes": "Requires qualitative narrative on product/service redesign for reduced energy requirements. Cannot be derived from dataset."
+      }
+    }
+  },
+
+  "GRI_303": {
+    "standard": "GRI 303: Water and Effluents 2018",
+    "disclosures": {
+      "303_1": {
+        "title": "Interactions with water as a shared resource",
+        "status": "narrative_gap",
+        "notes": "Requires water policy, stress area identification methodology, and water stewardship commitments. Rendered as narrative placeholder."
+      },
+      "303_2": {
+        "title": "Management of water discharge-related impacts",
+        "status": "narrative_gap",
+        "notes": "Requires effluent treatment approach, permit conditions, discharge standards applied, and contractor destination confirmation."
+      },
+      "303_3": {
+        "title": "Water withdrawal",
+        "sub_disclosures": {
+          "303_3_a": {"title": "Total water withdrawal from all areas by source", "status": "implemented", "columns": ["SurfaceWaterWithdrawalMl", "GroundwaterWithdrawalMl", "SeaWaterWithdrawalMl", "ThirdPartyWaterWithdrawalMl", "TotalWaterWithdrawalMl"]},
+          "303_3_b": {"title": "Total water withdrawal from water stress areas by source", "status": "implemented", "columns": ["SurfaceWaterStressAreasMl", "GroundwaterStressAreasMl", "SeaWaterStressAreasMl", "ThirdPartyWaterStressAreasMl", "TotalWaterStressAreasMl"]},
+          "303_3_c": {"title": "Total water withdrawal by water quality", "status": "implemented", "columns": ["FreshWaterWithdrawalMl", "OtherWaterWithdrawalMl"]}
+        },
+        "dataset": "water_data",
+        "notes": "Per GRI 303, harvested rainwater is classified as surface water and must be included in surface water totals."
+      },
+      "303_4": {
+        "title": "Water discharge",
+        "sub_disclosures": {
+          "303_4_a": {"title": "Total water discharge to all areas by destination", "status": "implemented", "columns": ["DischargeToSurfaceWaterMl", "DischargeToGroundwaterMl", "DischargeToSeawaterMl", "DischargeToThirdPartyMl", "TotalWaterDischargeMl"]},
+          "303_4_b": {"title": "Total water discharge by water quality", "status": "implemented", "columns": ["DischargeGreaterThan1000TDSMl", "DischargeLessOrEqual1000TDSMl"]},
+          "303_4_c": {"title": "Total water discharge to areas with water stress", "status": "data_gap", "missing_columns": ["DischargeToStressAreasMl_SurfaceWater", "DischargeToStressAreasMl_Groundwater", "DischargeToStressAreasMl_Seawater", "DischargeToStressAreasMl_ThirdParty", "TotalDischargeToStressAreasMl"], "notes": "Requires linking discharge destinations to WRI Aqueduct water stress classification."}
+        },
+        "dataset": "water_data"
+      },
+      "303_5": {
+        "title": "Water consumption",
+        "sub_disclosures": {
+          "303_5_a": {"title": "Total water consumption", "status": "implemented", "columns": ["TotalWaterConsumptionMl"]},
+          "303_5_b": {"title": "Water consumption in water stress areas", "status": "data_gap", "missing_columns": ["WaterConsumptionStressAreasMl"], "notes": "Requires mapping each site to WRI Aqueduct and tagging consumption by stress classification."},
+          "303_5_c": {"title": "Change in water storage", "status": "data_gap", "missing_columns": ["StorageChangeMl"], "notes": "GRI 303-5-c: Report significant changes in water stored that affect water consumption figures."}
+        },
+        "dataset": "water_data"
+      }
+    }
+  },
+
+  "GRI_305": {
+    "standard": "GRI 305: Emissions 2016",
+    "disclosures": {
+      "305_management": {
+        "title": "Management approach — Emissions",
+        "status": "narrative_gap",
+        "notes": "Requires emissions reduction targets, GHG accounting standard, base year rationale, GWP source, Scope 2 market-based approach, and reduction initiatives."
+      },
+      "305_1": {
+        "title": "Direct (Scope 1) GHG emissions",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["Scope1TotaltCO2e"],
+        "notes": "GHG accounting standard and GWP source require manual confirmation."
+      },
+      "305_2": {
+        "title": "Energy indirect (Scope 2) GHG emissions",
+        "status": "partial",
+        "dataset": "ghg_data",
+        "columns": ["Scope2LocationBasedtCO2e"],
+        "missing_columns": ["Scope2MarketBasedtCO2e"],
+        "notes": "Location-based method implemented. Market-based method requires REC/GO data."
+      },
+      "305_3": {
+        "title": "Other indirect (Scope 3) GHG emissions",
+        "status": "partial",
+        "dataset": "ghg_data",
+        "columns": ["Scope3TotaltCO2e"],
+        "notes": "Category-level breakdown (GHG Protocol Categories 1-15) not tracked individually."
+      },
+      "305_4": {
+        "title": "GHG emissions intensity",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["Scope1IntensitytCO2epert", "Scope2IntensitytCO2epert", "Scope3IntensitytCO2epert"]
+      },
+      "305_5": {
+        "title": "Reduction of GHG emissions",
+        "status": "data_gap",
+        "notes": "Requires initiative-level GHG reduction attribution data not currently tracked in dataset."
+      },
+      "305_6": {
+        "title": "Emissions of ozone-depleting substances (ODS)",
+        "status": "data_gap",
+        "missing_columns": ["ODSEmissionstCFC11e"],
+        "notes": "ODS inventory not currently tracked in dataset."
+      },
+      "305_7": {
+        "title": "NOx, SOx, and other significant air emissions",
+        "status": "partial",
+        "dataset": "ghg_data",
+        "columns": ["GrossNOxt", "GrossSOxt", "GrossVOCt", "GrossPMt"],
+        "notes": "Data available from 2022 only. POPs, HAPs, and ODS sub-categories not tracked.",
+        "years_available": "2022+"
+      }
+    }
+  },
+
+  "GRI_306": {
+    "standard": "GRI 306: Waste 2020",
+    "disclosures": {
+      "306_1": {
+        "title": "Waste generation and significant waste-related impacts",
+        "status": "narrative_gap",
+        "notes": "Requires identification of waste-generating processes, significant waste types, and material topic boundary. Cannot be auto-generated."
+      },
+      "306_2": {
+        "title": "Management of significant waste-related impacts",
+        "status": "narrative_gap",
+        "notes": "Requires description of waste prevention programmes, waste hierarchy application, and contractor tracking processes."
+      },
+      "306_3": {
+        "title": "Waste generated",
+        "status": "implemented",
+        "dataset": "waste_data",
+        "columns": ["WasteCategory", "HazardousFlag", "ValueNumber"],
+        "notes": "Total = Diverted + Disposed. Composition data by material type not tracked."
+      },
+      "306_4": {
+        "title": "Waste diverted from disposal",
+        "status": "partial",
+        "dataset": "waste_data",
+        "columns": ["WasteCategory", "HazardousFlag", "IndicatorName", "ValueNumber"],
+        "notes": "Onsite/offsite split and contractor destination confirmation not tracked in dataset."
+      },
+      "306_5": {
+        "title": "Waste directed to disposal",
+        "status": "partial",
+        "dataset": "waste_data",
+        "columns": ["WasteCategory", "HazardousFlag", "IndicatorName", "ValueNumber"],
+        "notes": "Onsite/offsite split, open burning flag, and contractor destination confirmation not tracked."
+      }
+    }
+  },
+
+  "GRI_403": {
+    "standard": "GRI 403: Occupational Health and Safety 2018",
+    "disclosures": {
+      "403_1": {"title": "OHS management system",                                         "status": "narrative_gap"},
+      "403_2": {"title": "Hazard identification, risk assessment, incident investigation", "status": "narrative_gap"},
+      "403_3": {"title": "Occupational health services",                                  "status": "narrative_gap"},
+      "403_4": {"title": "Worker participation, consultation, and communication on OHS",  "status": "narrative_gap"},
+      "403_5": {"title": "Worker training on OHS",                                        "status": "narrative_gap"},
+      "403_6": {"title": "Promotion of worker health",                                    "status": "narrative_gap"},
+      "403_7": {"title": "Prevention and mitigation of OHS impacts via business relationships", "status": "narrative_gap"},
+      "403_8": {
+        "title": "Workers covered by an OHS management system",
+        "status": "implemented",
+        "dataset": "safety_data",
+        "columns": ["Headcount", "CoveredOHS", "WorkerType"]
+      },
+      "403_9": {
+        "title": "Work-related injuries",
+        "status": "implemented",
+        "dataset": "safety_data",
+        "columns": ["HoursWorked", "RecordableInjuries", "LostTimeInjuries", "HighConsequenceInjuries", "FatalitiesInjury", "WorkerType"],
+        "notes": "Injury type breakdown (403-9-c hazard classification) requires manual OHS system input. TRIR and LTIFR computed on 200,000-hour basis."
+      },
+      "403_10": {
+        "title": "Work-related ill health",
+        "status": "implemented",
+        "dataset": "safety_data",
+        "columns": ["RecordableIllHealth", "FatalitiesIllHealth", "WorkerType"],
+        "notes": "Ill health hazard-type breakdown (403-10-c) requires occupational disease case analysis — not auto-derivable."
+      }
+    }
+  }
+}

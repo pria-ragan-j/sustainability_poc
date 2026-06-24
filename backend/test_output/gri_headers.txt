@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+date: Mon, 22 Jun 2026 10:32:22 GMT
+server: uvicorn
+content-disposition: attachment; filename=esg_gri_report_all.pdf
+content-type: application/pdf
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+access-control-expose-headers: Content-Disposition
+vary: Origin
+transfer-encoding: chunked
+

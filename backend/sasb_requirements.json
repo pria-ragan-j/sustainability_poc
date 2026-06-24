@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "description": "Structured SASB disclosure requirements for the Sustainable Industry Classification System (SICS) Chemicals standard (RT-CH), mirroring the status taxonomy already used in gri_requirements.json. Each disclosure lists its status, the dataset columns it draws from (reused from the existing 5 GRI datasets wherever possible), and any known data gaps.",
+    "industry": "Resource Transformation Sector — Chemicals (RT-CH), assumed from the CarbonBlackProductiont production denominator used throughout the codebase. Confirm with stakeholders if the entity's primary SICS classification differs.",
+    "statuses": {
+      "implemented":    "Disclosed and sourced from existing dataset columns",
+      "computed":       "Derived/calculated from existing dataset columns",
+      "narrative_gap":  "Required qualitative management narrative — cannot be auto-generated from data",
+      "data_gap":       "Requires dataset column(s) that do not currently exist",
+      "partial":        "Some of the disclosure is computed; a sub-part is missing data or methodology confirmation"
+    }
+  },
+
+  "RT-CH-110": {
+    "standard": "RT-CH-110a — Greenhouse Gas Emissions",
+    "disclosures": {
+      "110a_1_gross_scope1": {
+        "title": "Gross global Scope 1 emissions",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["Scope1TotaltCO2e"],
+        "notes": "Identical figure to GRI 305-1; reused verbatim via /api/sasb/kpis (sasb-scope1-ghg)."
+      },
+      "110a_1_regulatory_coverage": {
+        "title": "Percentage of Scope 1 emissions covered under emissions-limiting regulations",
+        "status": "data_gap",
+        "missing_columns": ["RegulatoryCoverageFlag (per plant/region)"],
+        "notes": "No column in any dataset flags which facilities operate under an emissions cap-and-trade or similar regulatory scheme."
+      },
+      "110a_2": {
+        "title": "Discussion of long/short-term strategy to manage Scope 1 emissions, targets, and performance against targets",
+        "status": "narrative_gap",
+        "notes": "Qualitative management narrative; cannot be derived from data. Rendered as a placeholder table in SASB reports, same convention as GRI management-approach disclosures."
+      }
+    }
+  },
+
+  "RT-CH-120": {
+    "standard": "RT-CH-120a — Air Quality",
+    "disclosures": {
+      "120a_1_nox": {
+        "title": "Air emissions of NOx (excluding N2O)",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["GrossNOxt"],
+        "notes": "Already computed in get_ghg_kpis() and the /api/environment/ghg chart endpoint; was not previously surfaced as a KPI card. Now exposed via /api/sasb/kpis (sasb-nox)."
+      },
+      "120a_1_sox": {
+        "title": "Air emissions of SOx",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["GrossSOxt"],
+        "notes": "Same as NOx above. Exposed as sasb-sox."
+      },
+      "120a_1_voc": {
+        "title": "Air emissions of volatile organic compounds (VOCs)",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["GrossVOCt"],
+        "notes": "Same as NOx above. Exposed as sasb-voc."
+      },
+      "120a_1_pm": {
+        "title": "Air emissions of particulate matter (PM10)",
+        "status": "implemented",
+        "dataset": "ghg_data",
+        "columns": ["GrossPMt"],
+        "notes": "Same as NOx above. Exposed as sasb-pm."
+      },
+      "120a_1_haps": {
+        "title": "Air emissions of hazardous air pollutants (HAPs)",
+        "status": "data_gap",
+        "missing_columns": ["HAPEmissionst (or per-substance breakdown)"],
+        "notes": "No HAP-specific column exists in the GHG dataset today."
+      }
+    }
+  },
+
+  "RT-CH-130": {
+    "standard": "RT-CH-130a — Energy Management",
+    "disclosures": {
+      "130a_1_total_energy": {
+        "title": "Total energy consumed",
+        "status": "implemented",
+        "dataset": "energy_data",
+        "columns": ["TotalEnergyConsumedGJ"],
+        "notes": "Identical figure to GRI 302-1; exposed as sasb-energy-consumed."
+      },
+      "130a_1_pct_grid": {
+        "title": "Percentage of total energy from grid electricity",
+        "status": "partial",
+        "columns": ["ElectricityConsumedGJ", "TotalEnergyConsumedGJ"],
+        "notes": "Grid electricity volume exists but is not yet framed as a percentage-of-total KPI; this is a computation gap, not a data gap."
+      },
+      "130a_1_pct_renewable": {
+        "title": "Percentage of total energy from renewable sources",
+        "status": "implemented",
+        "dataset": "energy_data",
+        "columns": ["ElectricityRenewableGJ", "ElectricityNonRenewableGJ"],
+        "notes": "Computed as renewable / (renewable + non-renewable) in /api/sasb/kpis (sasb-renewable-pct)."
+      }
+    }
+  },
+
+  "RT-CH-140": {
+    "standard": "RT-CH-140a — Water Management",
+    "disclosures": {
+      "140a_1_withdrawn": {
+        "title": "Total water withdrawn",
+        "status": "implemented",
+        "dataset": "water_data",
+        "columns": ["TotalWaterWithdrawn"],
+        "notes": "Identical figure to GRI 303-3; exposed as sasb-water-withdrawn (converted to ML)."
+      },
+      "140a_1_consumed": {
+        "title": "Total water consumed",
+        "status": "implemented",
+        "dataset": "water_data",
+        "columns": ["WaterConsumed"],
+        "notes": "Identical figure to GRI 303-5; exposed as sasb-water-consumed (converted to ML)."
+      },
+      "140a_1_pct_stress": {
+        "title": "Percentage of each in regions with High or Extremely High Baseline Water Stress (WRI Aqueduct)",
+        "status": "partial",
+        "columns": ["TotalWaterWithdrawnStressArea"],
+        "notes": "A self-reported stress-area flag exists and is reused for sasb-water-stress-pct, but it has not been confirmed to align with the WRI Aqueduct baseline water stress classification SASB expects. Flagged 'partial' until that mapping is verified — same caveat already noted in gri_requirements.json for the related GRI 303 sub-disclosures (303_3_b, 303_4_c, 303_5_b)."
+      },
+      "140a_2": {
+        "title": "Number of incidents of non-compliance associated with water quality and/or quantity permits, standards, and regulations",
+        "status": "data_gap",
+        "missing_columns": ["WaterComplianceIncidentLog"],
+        "notes": "No compliance-incident dataset exists anywhere in the system."
+      }
+    }
+  },
+
+  "RT-CH-150": {
+    "standard": "RT-CH-150a — Hazardous Waste Management",
+    "disclosures": {
+      "150a_1_generated": {
+        "title": "Amount of hazardous waste generated",
+        "status": "implemented",
+        "dataset": "waste_data",
+        "columns": ["WasteCategory", "ValueNumber", "HazardousFlag"],
+        "notes": "HazardousFlag column already exists in the GRI 306 dataset (used internally by pdf_report.py's pivot_haz() for GRI 306-4/306-5 hazardous-split tables) but was never surfaced as a standalone KPI. Now exposed via hazardous_waste_breakdown() and /api/sasb/kpis (sasb-hazardous-waste, sasb-nonhazardous-waste)."
+      },
+      "150a_1_pct_recycled": {
+        "title": "Percentage of hazardous waste recycled",
+        "status": "implemented",
+        "dataset": "waste_data",
+        "columns": ["WasteCategory", "ValueNumber", "HazardousFlag"],
+        "notes": "Computed as hazardous-diverted / hazardous-generated. Exposed as sasb-hazardous-recycled-pct."
+      }
+    }
+  },
+
+  "RT-CH-210": {
+    "standard": "RT-CH-210a — Community Relations",
+    "disclosures": {
+      "210a_1": {
+        "title": "Discussion of engagement processes to manage risks and opportunities associated with community interests",
+        "status": "narrative_gap",
+        "notes": "Pure qualitative narrative; no dataset exists or is planned for this topic."
+      }
+    }
+  },
+
+  "RT-CH-320": {
+    "standard": "RT-CH-320a — Workforce Health & Safety",
+    "disclosures": {
+      "320a_1_trir": {
+        "title": "Total recordable incident rate (TRIR), for direct employees and contractors",
+        "status": "implemented",
+        "dataset": "safety_data",
+        "columns": ["RecordableInjuries", "HoursWorked", "WorkerType"],
+        "notes": "WorkerType column already exists in GRI 403 data but the existing rate_per_basis() calls summed across both Employee and Contractor. New safety_rate_split() helper filters by WorkerType before applying the identical rate_per_basis() formula. Exposed as sasb-trir-total, sasb-trir-employee, sasb-trir-contractor."
+      },
+      "320a_1_fatality_rate": {
+        "title": "Fatality rate, for direct employees and contractors",
+        "status": "implemented",
+        "dataset": "safety_data",
+        "columns": ["FatalitiesInjury", "FatalitiesIllHealth", "HoursWorked"],
+        "notes": "FatalitiesInjury and FatalitiesIllHealth columns already exist and are already summed in get_safety_kpis(), but no fatality-rate KPI existed. New fatality_rate() helper reuses rate_per_basis(). Exposed as sasb-fatality-rate."
+      },
+      "320a_1_nmfr": {
+        "title": "Near miss frequency rate (NMFR)",
+        "status": "data_gap",
+        "missing_columns": ["NearMissCount"],
+        "notes": "GRI 403 tracks First Aid Cases, Recordable Injuries, Lost Time Injuries, and High-Consequence Injuries, but no 'near miss' (no-injury precursor event) column exists."
+      }
+    }
+  },
+
+  "RT-CH-410": {
+    "standard": "RT-CH-410 — Product Design & Chemical Safety",
+    "disclosures": {
+      "410a_1": {
+        "title": "Revenue from products designed for use-phase resource efficiency",
+        "status": "narrative_gap",
+        "notes": "Requires product-level revenue and design-intent data that does not exist in any current dataset."
+      },
+      "410b_1": {
+        "title": "Percentage of products that contain substances on a hazard chemical list, and discussion of screening process",
+        "status": "data_gap",
+        "missing_columns": ["ChemicalInventory/HazardClassificationRegister"],
+        "notes": "No chemical inventory or hazard-classification dataset exists. Optional scope — many chemicals reporters treat this as narrative-only in year one."
+      },
+      "410b_2": {
+        "title": "Discussion of safety and environmental stewardship practices for products containing hazardous substances",
+        "status": "narrative_gap",
+        "notes": "Pure qualitative narrative, dependent on 410b_1 data existing first."
+      }
+    }
+  },
+
+  "RT-CH-530": {
+    "standard": "RT-CH-530a — Management of the Legal & Regulatory Environment",
+    "disclosures": {
+      "530a_1": {
+        "title": "Discussion of corporate positions related to government regulations and/or policy proposals on environmental and social factors",
+        "status": "narrative_gap",
+        "notes": "Pure qualitative narrative; no dataset exists or is planned for this topic."
+      }
+    }
+  },
+
+  "RT-CH-540": {
+    "standard": "RT-CH-540a — Operational Safety, Emergency Preparedness & Response",
+    "disclosures": {
+      "540a_1_count": {
+        "title": "Process Safety Incidents Count (PSIC)",
+        "status": "data_gap",
+        "missing_columns": ["ProcessSafetyIncident dataset (new — see SASB_INTEGRATION_PLAN.md Section 4)"],
+        "notes": "GRI 403 captures occupational safety (slips, falls, struck-by), not process safety (loss of containment, fire/explosion at a chemical facility). This is a genuinely different operational data source that does not exist today. Flagged as the highest-priority gap in the SASB integration plan."
+      },
+      "540a_1_pstir": {
+        "title": "Process Safety Total Incident Rate (PSTIR)",
+        "status": "data_gap",
+        "missing_columns": ["ProcessSafetyIncident dataset"],
+        "notes": "Formula would reuse rate_per_basis() unchanged once incident-count and hours-worked-at-covered-facilities data exists."
+      },
+      "540a_2_psisr": {
+        "title": "Process Safety Incident Severity Rate (PSISR)",
+        "status": "data_gap",
+        "missing_columns": ["ProcessSafetyIncident dataset with severity classification"],
+        "notes": "Same dependency as PSTIR, plus a severity classification per incident."
+      }
+    }
+  }
+}
