@@ -56,10 +56,13 @@ export const api = {
     body: JSON.stringify({ domain, low, medium, high }),
   }).then((r) => { if (!r.ok) throw new Error(`Failed: ${r.status}`); return r.json(); }),
   resetAlertConfig: (domain) => del(`/api/alerts/config/${domain}`),
-  // Correlation analysis — KPI card chips + scatter/matrix endpoints
-  getKpiCorrelations: (kpiId, params) => get(`/api/kpi-correlations/${kpiId}`, params),
-  getCorrelation: (params) => get('/api/correlate', params),
-  getCorrelationMatrix: (params) => get('/api/correlate/matrix', params),
+  // Limits — per-KPI numeric thresholds (default: average across all years), admin-configurable.
+  getLimits: () => get('/api/limits'),
+  updateLimits: (updates) => fetch(`${BASE_URL}/api/limits`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ updates }),
+  }).then((r) => { if (!r.ok) throw new Error(`Failed: ${r.status}`); return r.json(); }),
   getEnvKpis: (params) => get('/api/environment/kpis', params),
   getWaterChart: (params) => get('/api/environment/water', params),
   getWasteChart: (params) => get('/api/environment/waste', params),
@@ -99,7 +102,7 @@ export const api = {
 export async function generateReport({ templates, year, plant, format, framework, fy }) {
   const endpoint = framework === 'BRSR' ? '/api/brsr/reports/generate' : '/api/reports/generate';
   const body = framework === 'BRSR'
-    ? { fy, plant, format }
+    ? { fy, plant, format, principles: templates }
     : { templates, year, plant, format, framework };
   const res = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',

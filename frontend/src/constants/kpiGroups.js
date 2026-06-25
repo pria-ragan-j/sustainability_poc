@@ -334,12 +334,14 @@ export const BRSR_ICON_COLORS = {
 };
 
 // BRSR P6 sub-tabs resolve to same GRI domains so chart/filter/insights
-// endpoints are reused. P3 safety shares 'safety'. Workforce/training/
-// governance/CSR have no live domain until new datasets are collected.
+// endpoints are reused. P3 safety shares 'safety'. Training/governance
+// have no live domain until new datasets are collected.
 export const BRSR_SUBTAB_DOMAIN = {
   brsr_energy:     'energy',
   brsr_water:      'water',
   brsr_ghg_air:    'emissions',
   brsr_waste:      'waste',
   brsr_safety:     'safety',
+  brsr_workforce:  'workforce',
+  brsr_csr:        'csr',
 };

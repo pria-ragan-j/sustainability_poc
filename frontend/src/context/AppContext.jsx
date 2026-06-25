@@ -13,9 +13,10 @@ const SUBTAB_DOMAIN = {
   safety: 'safety',
   energy: 'energy',
   emissions: 'emissions',
+  workforce: 'workforce',
 };
 
-const defaultFilters = { year: 'all', plant: 'all', region: 'all' };
+const defaultFilters = { year: 2025, plant: 'all', region: 'all' };
 
 export function AppProvider({ children }) {
   // Authentication gate: in-memory only, no persistence — refreshing the

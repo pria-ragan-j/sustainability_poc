@@ -293,6 +293,7 @@ button, select, input {
 }
 
 .kpi-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -305,6 +306,22 @@ button, select, input {
   gap: 6px;
   container-type: inline-size;
   min-height: 170px;
+}
+
+/* Disclosure standard code (e.g. "GRI 303-3", "RT-CH-140a.1", "BRSR P6") -
+   anchored top-left, mirroring .summary-card-arrow's top-right anchor on
+   the Summary page's domain tiles. Shared by KpiCard.jsx and SummaryPage.jsx. */
+.kpi-standard-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  background: var(--bg-card-hover);
+  border-radius: 5px;
+  padding: 2px 6px;
 }
 
 .kpi-card.placeholder {
@@ -992,6 +1009,31 @@ button, select, input {
   margin-bottom: 6px;
 }
 
+.report-section-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.report-section-label-row .report-section-label {
+  margin-bottom: 0;
+}
+
+.report-select-all-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.report-select-all-btn:hover {
+  text-decoration: underline;
+}
+
 .report-template-list {
   display: flex;
   flex-direction: column;
@@ -1484,6 +1526,15 @@ button, select, input {
 [data-tooltip].tooltip-align-right::before {
   left: auto;
   right: 0;
+  transform: none;
+}
+
+/* Left-aligned variant: for triggers that sit at the left edge of their
+   row (e.g. the first KPI card's limit badge) so the tooltip box doesn't
+   get clipped by the layout shell's left edge. */
+[data-tooltip].tooltip-align-left::after,
+[data-tooltip].tooltip-align-left::before {
+  left: 0;
   transform: none;
 }
 
@@ -2224,9 +2275,9 @@ button, select, input {
   border-color: var(--accent);
 }
 
-/* ─── KPI Card — correlation chip ──────────────────────────────────────────── */
+/* ─── KPI Card — limit badge ────────────────────────────────────────────────── */
 
-.kpi-corr-chip {
+.kpi-limit-chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -2234,12 +2285,26 @@ button, select, input {
   padding: 3px 8px;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: rgba(47, 143, 224, 0.05);
   font-size: 10px;
-  font-weight: 500;
-  color: var(--corr-color, var(--accent));
-  cursor: default;
+  font-weight: 600;
+  text-decoration: none;
   width: fit-content;
+}
+
+.kpi-limit-chip:hover {
+  text-decoration: underline;
+}
+
+.kpi-limit-chip--ok {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.kpi-limit-chip--breach {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-red);
 }
 
 /* ─── AI stream error / retry ───────────────────────────────────────────────── */
@@ -2550,5 +2615,66 @@ button, select, input {
   color: var(--accent-green);
   margin: 0;
   text-align: right;
+}
+
+/* ─── Limits page ────────────────────────────────────────────────────────── */
+
+.limits-page {
+  padding: 0 2px;
+  max-width: 100%;
+}
+
+.limits-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.limits-domain-section {
+  margin-bottom: 20px;
+}
+
+.limits-domain-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.limits-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 140px 80px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.limits-row-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.limits-baseline-hint {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.limits-reset-btn {
+  font-size: 11px;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.limits-reset-btn:hover {
+  text-decoration: underline;
 }
 

@@ -1,0 +1,373 @@
+GRI 303 Management Approach
+Disclosure 303-1: Interactions with water as a shared resource
+"Disclosure Element","Required Content / Placeholder"
+"a. How the organization interacts with water","[Required — manual input] Describe how and where water is withdrawn, consumed, and discharged, including any water-related impacts the organization has caused, contributed to, or is directly linked to through its business relationships."
+"b. Approach used to identify water-related impacts","[Required — manual input] Describe the approach used to identify water-related impacts across the value chain, including scope, timeframe, and tools/methodologies applied (e.g., WRI Aqueduct Water Risk Atlas, WWF Water Risk Filter)."
+"c. How water-related impacts are addressed","[Required — manual input] Describe how the organization works with stakeholders — communities, regulators, and value-chain partners — to steward water as a shared resource."
+"d. Process for setting water-related goals and targets","[Required — manual input] Describe the process for setting water-related goals and targets, and explain how they relate to public policy and the local context of each water-stressed area."
+
+Notes:
+# GRI 303-1 is a management approach disclosure requiring qualitative organizational narrative.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 303: Water and Effluents 2018, Disclosure 303-1.
+
+Disclosure 303-2: Management of water discharge-related impacts
+"Disclosure Element","Required Content / Placeholder"
+"a. Minimum standards for effluent quality","[Required — manual input] Describe minimum standards set for effluent discharge quality and how they were determined, covering: (i) standards for facilities with no local discharge requirements; (ii) any internally developed water quality standards; (iii) sector-specific standards applied; (iv) whether the receiving waterbody profile was considered."
+
+Notes:
+# GRI 303-2 is a management approach disclosure requiring qualitative organizational narrative.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 303: Water and Effluents 2018, Disclosure 303-2.
+
+GRI 303-3 Water Withdrawal
+Total water withdrawal from all areas (GRI 303-3-a)
+Source,Units,2019,2020,2021,2022,2023,2024,2025
+"Surface Water",megaliters,5500.001,7223.001,6585.003,25913.999,202749.004,184167.998,246375.997
+"Groundwater",megaliters,5100.005,4992.0,4221.0,4377.0,3393.0,2355.999,4580.003
+"Seawater",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Produced Water",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Third-party Water",megaliters,4099.999,4339.996,4659.999,5991.0,5923.002,5462.999,5244.999
+
+Notes:
+# Surface Water, Groundwater, Seawater, and Produced Water are sourced directly from metered withdrawal data.
+# Third-party Water reflects water purchased from municipal suppliers (e.g. DJB, MCGM, CMWSSB).
+# Per GRI 303 guidance, harvested (collected) rainwater is classified as surface water and is included in the Surface Water withdrawal total.
+# Values converted from cubic meters (m³) to megaliters (ML) by dividing by 1,000 (1 ML = 1,000 m³).
+
+Total water withdrawal from areas with water stress (GRI 303-3-b)
+Source,Units,2019,2020,2021,2022,2023,2024,2025
+"Surface Water",megaliters,1620.002,1728.999,1455.002,1789.001,2082.002,793.001,859.998
+"Groundwater",megaliters,899.998,982.002,328.001,445.001,435.001,1166.999,1015.999
+"Seawater",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Produced Water",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Third-party Water",megaliters,1600.0,1696.0,2483.001,2967.001,3117.0,2456.999,2452.0
+"Total — all sources (stress areas)",megaliters,4120.0,4407.001,4266.004,5201.003,5634.003,4416.999,4327.997
+
+Notes:
+# Stress-area volumes are sourced directly from the dataset's per-source water-stress columns.
+# Water stress classification methodology: [Required — specify the tool used, e.g., WRI Aqueduct Water Risk Atlas at high (40–80%) or extremely high (>80%) baseline water stress, or WWF Water Risk Filter at moderate/high/very high water depletion.]
+# GRI 303 compilation requirement 2.1 (SHALL): Organizations must use publicly available and credible tools to assess water stress.
+# GRI 303-3-b-v: For Third-party water in stress areas, the standard additionally requires a breakdown by the source (surface, groundwater, seawater, produced water) from which the third-party supplier draws. This sub-breakdown is not currently available in the dataset.
+
+Total water withdrawal by water quality (GRI 303-3-c)
+Quality,Units,2019,2020,2021,2022,2023,2024,2025
+"Freshwater (≤1,000 mg/L TDS)",megaliters,14700.005,16554.997,15466.002,36281.999,212065.006,191986.996,256200.999
+"Other Water (>1,000 mg/L TDS)",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+
+Notes:
+# TDS threshold: freshwater ≤1,000 mg/L Total Dissolved Solids; other water >1,000 mg/L (GRI 303 Glossary).
+# GRI 303-3-c requires this TDS quality breakdown per source (Surface Water, Groundwater, etc.) not as an aggregate total.
+# The current dataset tracks aggregate freshwater/other-water volumes across all sources. Per-source TDS breakdown requires additional dataset columns (e.g., SurfaceWaterFreshwater, GroundwaterFreshwater).
+
+GRI 303-4 Water Discharge
+Total water discharge to all areas (GRI 303-4-a)
+Destination,Units,2019,2020,2021,2022,2023,2024,2025
+"Surface Water",megaliters,2800.0,3039.0,3029.0,21338.998,199051.002,180624.994,242457.997
+"Groundwater",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Seawater",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Third-party Water",megaliters,590.004,623.002,577.001,682.994,685.0,624.003,635.999
+
+Notes:
+# Third-party Water reflects discharge routed to municipal sewage / third-party treatment facilities.
+# Per GRI 303 definitions, discharge destination 'Seawater' covers marine environments. Brackish/estuarine discharge is reported under this category with this note.
+
+Total water discharge by water quality (GRI 303-4-b)
+Quality,Units,2019,2020,2021,2022,2023,2024,2025
+"Freshwater (≤1,000 mg/L TDS)",megaliters,2800.0,3039.0,3029.0,21338.998,199051.002,180624.994,242457.997
+"Other Water (>1,000 mg/L TDS)",megaliters,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+
+Notes:
+# TDS threshold: freshwater ≤1,000 mg/L; other water >1,000 mg/L (GRI 303 Glossary).
+# GRI 303-4-d: Priority substances of concern — defining priority substances, setting discharge limits, and reporting non-compliance incidents — requires qualitative input and effluent quality monitoring data not currently in the dataset.
+
+Total water discharge to areas with water stress (GRI 303-4-c)
+Quality Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Freshwater (≤1,000 mg/L TDS) — to water stress areas",megaliters,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+"Other Water (>1,000 mg/L TDS) — to water stress areas",megaliters,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+
+Notes:
+# GRI 303-4-c requires total water discharge to water stress areas broken down by freshwater/other water quality.
+# DATA GAP: The current dataset does not include discharge-to-stress-area classification by TDS quality.
+# Action required: Add 'FreshwaterDischargedStressArea' and 'OtherWaterDischargedStressArea' columns to GRI303_Water_Dataset to complete this disclosure.
+
+GRI 303-5 Water Consumption
+Water consumption (GRI 303-5)
+Metric,Units,2019,2020,2021,2022,2023,2024,2025
+"Water Consumed (withdrawn − discharged)",megaliters,11310.001,12892.995,11860.001,14260.007,12329.004,10737.999,13107.003
+"Water Recycled / Reused",megaliters,1361.151,1558.081,1416.317,1724.981,1482.371,1297.568,1579.647
+"Water Consumed in Stress Areas",megaliters,3569.999,3810.0,3632.006,4514.003,4933.003,4416.999,4327.997
+
+Notes:
+# GRI 303-5 formula: Water Consumption = Total Water Withdrawn − Total Water Discharged.
+# Water Recycled/Reused is reported as a positive efficiency indicator; it does not affect withdrawal or consumption totals.
+# GRI 303-5-c Change in water storage: Assessed as not significant — no large water storage facilities are operated. If significant water storage is introduced, this metric must be added to this table.
+
+GRI 302 Energy — Management Approach
+GRI 302 Energy — Management Approach
+"Disclosure Element","Required Content / Placeholder"
+"Energy policy and commitments","[Required — manual input] Describe the organization's policies and commitments related to energy management, including any renewable energy targets or energy intensity reduction goals."
+"Energy management responsibilities","[Required — manual input] Identify who holds responsibility for managing energy-related impacts and implementing the organization's energy policies at senior management level."
+"Evaluating effectiveness of energy management","[Required — manual input] Describe how the organization evaluates the effectiveness of energy management actions, including KPIs monitored, internal audits, and senior management review frequency."
+
+Notes:
+# GRI 302 management approach must explain how the organization identifies and manages its material energy-related impacts.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 302: Energy 2016.
+
+GRI 302-1 Energy consumption within the organisation
+Energy consumed within the organization (GJ)
+Source,Units,2019,2020,2021,2022,2023,2024,2025
+"Oil (Non-production)",GJ,38065.8,35078.9,57456.6,47344.1,49088.2,34425.2,49075.7
+"Natural Gas (Non-prod.)",GJ,274073.9,263091.6,323193.4,311118.3,245441.0,318433.8,347991.2
+"Electricity Consumed",GJ,647119.0,613880.3,635613.7,601946.4,584967.7,796084.3,825363.6
+"Steam Consumed",GJ,1827159.5,1708341.1,1730880.1,1744968.2,2106701.8,2237642.4,2297633.9
+"Tail Gas Consumed",GJ,1712962.2,1596088.8,1673423.6,2759484.3,1828535.4,1846054.9,1878260.0
+"Compressed Air",GJ,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Hot Water Consumed",GJ,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Total Energy Consumed",GJ,4499380.3,4216480.6,4420567.3,5464861.3,4814734.0,5232640.6,5398324.3
+
+Notes:
+# Site-specific gross calorific values (GCV) used for natural gas conversions.
+# Conversion factors applied: 780 MKCal for electricity and 4.187 MKCal to GJ for thermal energy.
+# GRI 302-1-f: The standards, methodologies, and assumptions used for energy calculations are documented above. The GRI 302: Energy 2016 standard is followed.
+# GRI 302-1-a: Fuel types listed include non-renewable fuels. Renewable fuels (biofuels, biomass, etc.) should be reported separately if consumed; if none, state 'None'.
+
+Energy sold (GJ)
+Source,Units,2019,2020,2021,2022,2023,2024,2025
+"Electricity Sold",GJ,464403.1,445501.7,420151.4,456532.4,564514.2,533591.6,553216.7
+"Tail Gas Sold",GJ,761316.5,715609.0,678706.1,581656.0,707688.2,748749.5,762903.7
+"Hot Water Sold",GJ,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Steam Sold",GJ,1180040.6,1112000.3,1106039.6,946881.9,1161754.0,1333979.1,1351811.8
+"Total Energy Sold",GJ,2405760.2,2273111.0,2204897.1,1985070.2,2433956.5,2616320.3,2667932.3
+"Net Energy (Consumed − Sold)",GJ,4499380.3,4216480.6,4420567.3,5464861.3,4814734.0,5232640.6,5398324.3
+
+Renewable electricity and energy intensity (GRI 302-3)
+Metric,Units,2019,2020,2021,2022,2023,2024,2025
+"Renewable Electricity",GJ,61102.3,61208.2,61232.0,61227.2,56156.9,77709.0,81387.5
+"Non-Renewable Electricity",GJ,586016.7,552672.1,574381.7,540719.2,528810.8,718375.3,743976.1
+"Renewable Electricity %",%,9.4,10.0,9.6,10.2,9.6,9.8,9.9
+"Energy Intensity",GJ/t,11.82,12.02,12.31,16.16,11.77,12.16,12.1
+
+Notes:
+# Energy intensity = Total energy consumed (GJ) / Total production (tonnes). Denominator: production volume in metric tonnes.
+# Renewable Electricity % = sum(renewable GJ) / sum(renewable + non-renewable GJ) per year (GRI-weighted ratio, consistent with the dashboard KPI and SASB report calculations).
+
+GRI 302-2 Energy consumption outside the organisation
+Upstream and downstream energy (GRI 302-2)
+Source,Units,2019,2020,2021,2022,2023,2024,2025
+"Upstream Energy",GJ,3502055.9,3279874.6,3375575.3,3195726.4,3898421.0,4298855.2,4224969.5
+"Downstream Energy",GJ,704217.7,659482.9,678706.1,642527.0,777229.8,817600.1,838747.9
+"Upstream Intensity",GJ/t,9.2,9.35,9.4,9.45,9.53,9.99,9.47
+"Downstream Intensity",GJ/t,1.85,1.88,1.89,1.9,1.9,1.9,1.88
+
+Notes:
+# Upstream: raw material extraction, transport, and refining (GHG Protocol Scope 3 Categories 1, 3, 4).
+# Downstream: transport and distribution of finished products (Scope 3 Category 9).
+
+GRI 302-4 Reduction of energy consumption
+Energy reduction vs 2019 (GRI 302-4 indicator)
+Metric,Units,2019,2020,2021,2022,2023,2024,2025
+"Total Energy Reduction vs 2019 baseline (positive = saved)",GJ,0.0,282899.6,78813.0,-965481.1,-315353.7,-733260.3,-898944.0
+"Intensity Reduction vs 2019 baseline (positive = improved)",GJ/t,0.0,-0.2,-0.49,-4.34,0.05,-0.34,-0.28
+
+Notes:
+# Baseline year: 2019. Positive values = energy saved vs baseline; negative = increased consumption.
+# GRI 302-4 requires organisations to attribute specific reductions to individual conservation and efficiency initiatives.
+# Initiative-specific attribution cannot be auto-computed from the dataset and must be provided manually by the reporting organisation.
+
+GRI 302-5 Reductions in energy requirements of products and services
+Disclosure 302-5: Reductions in energy requirements of products and services
+"Disclosure Element","Required Content / Placeholder"
+"a. Reductions in product/service energy requirements","[Required if applicable — manual input] Report reductions in energy requirements of sold products or services compared to prior reporting periods, in joules or multiples. State the methodology and assumptions used to calculate reductions (e.g., lifecycle assessment, engineering estimates)."
+
+Notes:
+# If no product or service energy reduction programmes exist, state 'Not applicable' with a brief explanation.
+
+GRI 305 Emissions — Management Approach
+GRI 305 Emissions — Management Approach
+"Disclosure Element","Required Content / Placeholder"
+"Emissions reduction policy and targets","[Required — manual input] Describe the organization's GHG reduction targets (absolute and/or intensity-based), including any science-based targets (SBTs), net-zero commitments, or renewable energy procurement goals."
+"GHG accounting methodology and base year","[Required — manual input] State which GHG Protocol standard is applied (e.g., Corporate Accounting and Reporting Standard, Scope 2 Guidance). Identify the base year, the reason for its selection, and the recalculation policy when significant structural changes occur."
+"GWP values applied","[Required — manual input] Specify the IPCC Assessment Report GWP values used (e.g., AR4, AR5, AR6) and the 100-year time horizon. State whether biogenic CO₂ is included in or excluded from Scope 1."
+"Scope 2 — market-based methodology","[Required if applicable] Describe whether the organization purchases renewable energy certificates (RECs/GOs) that affect market-based Scope 2 figures. Provide market-based Scope 2 values or explain why they equal the location-based figures."
+"Emission reduction initiatives","[Required — manual input] Describe programmes in place to reduce direct (Scope 1) and indirect (Scope 2/3) GHG emissions, including energy efficiency upgrades, fuel switching, and carbon offset/removal activities."
+
+Notes:
+# GRI 305 management approach must explain how the organization manages its material emissions-related impacts.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 305: Emissions 2016.
+
+GRI 305-1/305-2/305-3 GHG Emissions
+GHG emissions by scope (GRI 305-1/305-2/305-3)
+Scope,Units,2019,2020,2021,2022,2023,2024,2025
+"Scope 1 — Direct Emissions",tCO₂e,3100000.0,3151354.0,3177044.0,3806644.0,3657396.0,3698154.0,3573987.8
+"Scope 2 — Location-based Indirect",tCO₂e,82000.0,83913.0,86950.0,87605.0,83656.0,56093.0,52250.9
+"Scope 3 — Other Indirect",tCO₂e,1700000.1,1830931.0,0.0,2025020.0,2074032.0,1809748.0,1723314.0
+
+Notes:
+# GHG accounting standard: GHG Protocol Corporate Standard (confirm applicable version — manual verification required).
+# Base year: 2019. This represents the first year for which consistent GHG data is available in this system.
+# GWP source: IPCC Fifth Assessment Report (AR5) 100-year values. [Confirm if AR6 or another version applies — manual verification required.]
+# Scope 2 is reported on a location-based methodology per GHG Protocol Scope 2 Guidance.
+# Scope 2 market-based: Requires supplier-specific emission factors or residual mix factors and is not currently tracked in the dataset. If equivalent to location-based, state that explicitly.
+# Scope 3: A breakdown by GHG Protocol category (Categories 1–15) is not individually tracked. Where Scope 3 data was unavailable, values are shown as 0.
+# GRI 305-5 (reduction of GHG emissions vs base year) and GRI 305-6 (ozone-depleting substance emissions) require additional dataset columns or manual input and are not currently reported.
+
+GHG emissions intensity (GRI 305-4)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Scope 1 Intensity",tCO₂e/t,8.1608,9.0418,8.8256,11.2007,8.9148,8.5761,8.0292
+"Scope 2 Intensity",tCO₂e/t,0.2159,0.2408,0.2415,0.2578,0.2039,0.1301,0.1174
+"Scope 3 Intensity",tCO₂e/t,4.4753,5.2533,0.0,5.9584,5.0554,4.1968,3.8716
+
+Notes:
+# Intensity = tCO₂e / Production tonnes. Denominator: total production volume in metric tonnes.
+# Scope 1 and Scope 2 intensity denominators use the same production volume for comparability.
+
+GRI 305-7 Significant air emissions
+Significant air emissions (GRI 305-7)
+Pollutant,Units,2022,2023,2024,2025
+"NOx",tonnes,4161.0,4610.0,3322.0,3426.0
+"SOx",tonnes,25410.0,19034.0,10055.0,10496.0
+"VOC (Volatile Organic Compounds)",tonnes,143.0,110.0,52.0,87.0
+"PM (Particulate Matter)",tonnes,909.0,795.0,450.0,772.0
+
+Notes:
+# Air emission data available from 2022 onwards, when systematic stack monitoring and air quality measurement was established across all sites. Pre-2022 data is not available and is excluded from this disclosure.
+# GRI 305-7 also requires disclosure of persistent organic pollutants (POPs), hazardous air pollutants (HAPs), and ozone-depleting substances (ODS). These pollutant categories are not currently tracked in the dataset.
+
+GRI 306 Waste — Management Approach
+Disclosure 306-1: Waste generation and significant waste-related impacts
+"Disclosure Element","Required Content / Placeholder"
+"a. Waste generation and significant impacts","[Required — manual input] Describe how the organization generates waste and the significant waste-related impacts in its own activities and value chain. Identify the significant waste types and the processes or activities that generate them."
+"b. Material topic boundary","[Required — manual input] Describe the boundary of the material topic — identify which parts of the value chain generate the significant waste-related impacts (upstream, own operations, or downstream)."
+
+Notes:
+# GRI 306-1 is a management approach disclosure requiring qualitative organizational narrative.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 306: Waste 2020, Disclosure 306-1.
+
+Disclosure 306-2: Management of significant waste-related impacts
+"Disclosure Element","Required Content / Placeholder"
+"a. Actions to prevent waste generation","[Required — manual input] Describe actions taken to prevent waste generation, including waste prevention programmes, product design changes, and upstream collaboration with suppliers."
+"b. Actions to manage waste that cannot be prevented","[Required — manual input] Describe how the organization manages waste that cannot be prevented, including the waste management hierarchy applied (reuse → recycle → other recovery → dispose)."
+"c. Processes for tracking waste transferred to third parties","[Required — manual input] Describe the processes used to track and confirm the fate of waste transferred to contractors, including any auditing, chain-of-custody verification, or certifications required."
+
+Notes:
+# GRI 306-2 is a management approach disclosure requiring qualitative organizational narrative.
+# This section cannot be auto-generated from dataset values and must be completed by the reporting organization.
+# Reference: GRI 306: Waste 2020, Disclosure 306-2.
+
+GRI 306-3 Waste Generated
+Total waste generated (GRI 306-3)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Total Waste Generated",tonnes,22155.1,24648.1,25597.0,35660.1,41773.0,42708.9,41176.0
+"  Hazardous",tonnes,2500.1,2778.1,717.0,1582.1999999999998,1129.0,1002.9,1415.1
+"  Non-hazardous",tonnes,19655.0,21870.0,24880.0,34077.9,40644.0,41706.0,39761.0
+
+Notes:
+# Waste generation = Waste diverted from disposal + Waste directed to disposal (GRI 306-3 definition).
+# GRI 306-3-b: If contextually necessary, report the composition of generated waste by material type. Waste composition data is not currently tracked in the dataset.
+
+GRI 306-4 Waste Diverted From Disposal
+Waste diverted from disposal by recovery operation and hazardous classification (GRI 306-4)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Reuse — Hazardous",tonnes,80.0,98.0,0.0,72.0,143.0,8.0,5.0
+"Reuse — Non-hazardous",tonnes,2200.0,2449.0,1576.0,1252.0,3757.0,2092.0,4080.0
+"Recycling — Hazardous",tonnes,5.1,3.1,52.0,21.1,46.0,15.0,94.0
+"Recycling — Non-hazardous",tonnes,7500.0,8332.0,8128.1,10167.0,25586.0,23582.0,19333.0
+"Other Recovery — Hazardous",tonnes,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Other Recovery — Non-hazardous",tonnes,2600.0,2895.0,6599.9,11730.0,0.0,0.0,0.0
+"Total Diverted — Hazardous",tonnes,85.1,101.1,52.0,93.1,189.0,23.0,99.0
+"Total Diverted — Non-hazardous",tonnes,12300.0,13676.0,16304.0,23149.0,29343.0,25674.0,23413.0
+
+Notes:
+# Values split by Hazardous / Non-hazardous classification per GRI 306-4.
+# GRI 306-4-b: Organizations must report whether diverted waste is treated onsite (facility operated by the reporting organization) or offsite (third-party facility). Onsite/offsite distinction is not currently available in the dataset.
+# GRI 306-4-c: For offsite-diverted waste, organizations should confirm the final destination where possible. Contractor destination confirmation data is not currently tracked.
+
+GRI 306-5 Waste Directed to Disposal
+Waste directed to disposal by disposal operation and hazardous classification (GRI 306-5)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Incineration — Hazardous",tonnes,850.0,908.0,88.0,212.0,235.0,322.0,591.0
+"Incineration — Non-hazardous",tonnes,155.0,166.0,174.0,210.0,237.0,1574.0,271.0
+"Incineration (with recovery) — Hazardous",tonnes,0.0,0.0,2.0,50.1,33.0,22.9,2.0
+"Incineration (with recovery) — Non-hazardous",tonnes,0.0,0.0,0.0,10.9,0.0,85.0,591.0
+"Landfill — Hazardous",tonnes,1565.0,1769.0,575.0,1227.0,672.0,635.0,723.1
+"Landfill — Non-hazardous",tonnes,7200.0,8028.0,8402.0,10708.0,11064.0,14373.0,15486.0
+"Total Disposed — Hazardous",tonnes,2415.0,2677.0,665.0,1489.1,940.0,979.9,1316.1
+"Total Disposed — Non-hazardous",tonnes,7355.0,8194.0,8576.0,10928.9,11301.0,16032.0,16348.0
+
+Notes:
+# Values split by Hazardous / Non-hazardous classification per GRI 306-5.
+# GRI 306-5-b: Organizations must report whether disposed waste is treated onsite or offsite. Onsite/offsite distinction is not currently available in the dataset.
+# GRI 306-5-c: Open burning (with or without energy recovery) must be reported separately if it occurs. If no open burning takes place, state 'None'. Open burning data is not currently tracked in the dataset.
+# GRI 306-5-d: For offsite-disposed waste, organizations should confirm the final disposal destination where possible. Contractor destination confirmation data is not currently tracked.
+
+GRI 403 OHS — Management Approach
+GRI 403 OHS — Management Approach (Disclosures 403-1 through 403-7)
+"Disclosure","Required Content / Placeholder"
+"403-1: OHS management system","[Required — manual input] State whether the OHS management system is based on a legal requirement or a voluntary standard/programme (e.g., ISO 45001). Describe the scope of the system and identify any workers, activities, or workplaces that are excluded from it."
+"403-2: Hazard identification, risk assessment, and incident investigation","[Required — manual input] Describe the processes for workers to identify and report work-related hazards, the risk assessment methodology applied (e.g., bow-tie analysis, HAZOP), and the incident investigation process including root cause analysis and corrective action tracking."
+"403-3: Occupational health services","[Required — manual input] Describe how occupational health services facilitate workers' access to health promotion programmes, preventive health assessments, and appropriate medical care. Identify the functions these services perform."
+"403-4: Worker participation, consultation, and communication","[Required — manual input] Describe the processes for worker participation and consultation in developing, implementing, and evaluating the OHS management system, including how workers are represented (e.g., OHS committees, worker safety representatives)."
+"403-5: Worker training on occupational health and safety","[Required — manual input] Describe OHS training provided to workers, including specific training for hazardous activities, new worker induction training, and any refresher or recertification requirements."
+"403-6: Promotion of worker health","[Required — manual input] Describe how the organization facilitates worker access to non-occupational health services (e.g., general health screenings, mental health support) and any voluntary health promotion programmes offered."
+"403-7: Prevention and mitigation through business relationships","[Required — manual input] Describe measures taken to prevent or mitigate significant OHS impacts directly linked to operations through business relationships (e.g., contractor pre-qualification criteria, supplier OHS requirements, joint OHS audits)."
+
+Notes:
+# GRI 403-1 through 403-7 are management approach disclosures requiring qualitative organizational narrative.
+# These disclosures cannot be auto-generated from the OHS incident dataset and must be completed by the reporting organization.
+# Reference: GRI 403: Occupational Health and Safety 2018.
+
+GRI 403-8 OHS System Coverage
+Workers covered by an OHS management system (GRI 403-8)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Headcount — Employees",persons,25800.0,26160.0,26400.0,27000.0,27600.0,28320.0,28680.0
+"Headcount — Contractors",persons,8160.0,8400.0,8520.0,8760.0,9060.0,9360.0,9528.0
+"Covered by OHS System — Employees",persons,25800.0,26160.0,26400.0,27000.0,27600.0,28320.0,28680.0
+"Covered by OHS System — Contractors",persons,8160.0,8400.0,8520.0,8760.0,9060.0,9360.0,9528.0
+
+Notes:
+# GRI 403-8: Number of all employees and workers who are not employees but whose work is controlled by the organization, who are covered by an OHS management system.
+# If any workers are excluded from OHS system coverage, state the reason and number excluded.
+
+GRI 403-9 Work-related Injuries
+Work-related injuries by worker type
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Hours Worked — Employees",hours,4343004.0,4403604.0,4443996.0,4545000.0,4646004.0,4767204.0,4828956.0
+"Hours Worked — Contractors",hours,5856396.0,6149652.0,6190920.0,6336096.0,6452832.0,6666504.0,6887496.0
+"Recordable Injuries — Employees",count,19.0,21.0,15.0,12.0,15.0,10.0,15.0
+"Recordable Injuries — Contractors",count,15.0,16.0,8.0,16.0,6.0,8.0,2.0
+"Lost Time Injuries — Employees",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Lost Time Injuries — Contractors",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"High Consequence Injuries — Employees",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"High Consequence Injuries — Contractors",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Fatalities (Injury) — Employees",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Fatalities (Injury) — Contractors",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"TRIR — Employees (per 200k hrs)",rate,0.87,0.95,0.68,0.53,0.65,0.42,0.62
+"TRIR — Contractors (per 200k hrs)",rate,0.51,0.52,0.26,0.51,0.19,0.24,0.06
+"LTIFR — Employees (per 200k hrs)",rate,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"LTIFR — Contractors (per 200k hrs)",rate,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+
+Notes:
+# TRIR = Total Recordable Injury Rate per 200,000 hours worked (GRI 403-9 formula).
+# LTIFR = Lost Time Injury Frequency Rate per 200,000 hours worked (GRI 403-9 formula).
+# Rate normalization basis: 200,000 hours = GRI 403-9 standard annual full-time equivalent.
+# Worker inclusions: All employees and directly supervised contractors with recorded hours are included.
+# Worker exclusions: Independent contractors who control their own work are excluded per GRI 403-9 compilation requirement.
+# GRI 403-9-c requires identification of the main types of work-related hazard (e.g., working at height, chemical exposure, moving machinery) that caused injuries. Formal hazard-type classification requires additional input from the OHS management system and is not auto-derivable from incident count data alone.
+
+GRI 403-10 Work-related Ill Health
+Work-related ill health by worker type (GRI 403-10)
+Category,Units,2019,2020,2021,2022,2023,2024,2025
+"Recordable Ill Health Cases — Employees",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Recordable Ill Health Cases — Contractors",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Fatalities (Ill Health) — Employees",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Fatalities (Ill Health) — Contractors",count,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+
+Notes:
+# GRI 403-10: Recordable ill health includes cases requiring medical treatment, restricted work, job transfer, or time away from work due to occupational disease.
+# Worker inclusions/exclusions: Same as GRI 403-9 — all employees and directly supervised contractors are included; independent contractors who control their own work are excluded.
+# GRI 403-10-c requires identification of the main types of work-related hazard causing ill health (e.g., chemical exposure, ergonomic factors, biological agents). Hazard-to-illness causal linkage requires formal occupational disease case analysis and is not currently tracked in the dataset.
+

@@ -48,6 +48,31 @@ const GOVERNANCE_DOMAINS = [
   { id: 'compliance', label: 'Ethics & Compliance (P1)', icon: Scale, kpiId: 'brsr-complaint-resolution' },
 ];
 
+// limit: this card's entry from /api/limits, looked up directly by KPI id -
+// { threshold, baseline_default }. Rendered as a <span>, not a <Link> like
+// KpiCard's LimitBadge, because DomainCard's root element is itself a
+// <button> — an anchor can't legally nest inside one.
+function LimitBadge({ value, limit, higherIsBetter, unit, tooltipAlign }) {
+  if (!limit || value === null || value === undefined) return null;
+  const { threshold, baseline_default } = limit;
+  if (threshold === null || threshold === undefined) return null;
+
+  const isMinimum = higherIsBetter === true;
+  const breached  = isMinimum ? value < threshold : value > threshold;
+  const text      = breached ? (isMinimum ? 'Below Minimum' : 'Exceeds Limit') : 'Within Limit';
+  const alignClass = tooltipAlign ? ` tooltip-align-${tooltipAlign}` : '';
+  const tooltip = `Threshold: ${formatKpiValue(threshold)}${unit ? ` ${unit}` : ''}\nBaseline avg (all years): ${formatKpiValue(baseline_default)}${unit ? ` ${unit}` : ''}`;
+
+  return (
+    <span
+      className={`kpi-limit-chip ${breached ? 'kpi-limit-chip--breach' : 'kpi-limit-chip--ok'}${alignClass}`}
+      data-tooltip={tooltip}
+    >
+      {text}
+    </span>
+  );
+}
+
 function TrendChip({ trend, kpiId, higherIsBetterMap }) {
   if (trend === null || trend === undefined) return null;
 
@@ -73,16 +98,18 @@ function TrendChip({ trend, kpiId, higherIsBetterMap }) {
   );
 }
 
-function DomainCard({ domainMeta, kpiId, kpi, framework, iconColorMap, higherIsBetterMap, onClick }) {
+function DomainCard({ domainMeta, kpiId, kpi, framework, iconColorMap, higherIsBetterMap, onClick, limit, hideTrend, tooltipAlign }) {
   const Icon  = domainMeta.icon;
   const value = kpi ? kpi.value : null;
   const unit  = kpi ? kpi.unit  : '';
   const trend = kpi ? kpi.trend : null;
   const iconColor = (kpiId && iconColorMap[kpiId]) || 'var(--accent)';
   const notAvailable = !kpiId;
+  const standardCode = kpi ? (kpi.gri || kpi.sasb || (kpi.principle ? `BRSR ${kpi.principle}` : null)) : null;
 
   return (
     <button className="summary-domain-card" onClick={onClick}>
+      {standardCode && <span className="kpi-standard-badge">{standardCode}</span>}
       <ArrowRight size={13} className="summary-card-arrow" />
       <div className="summary-card-icon-wrap" style={{ '--kpi-icon-color': iconColor }}>
         <Icon size={26} style={{ color: iconColor }} />
@@ -102,8 +129,11 @@ function DomainCard({ domainMeta, kpiId, kpi, framework, iconColorMap, higherIsB
           <span className="summary-kpi-na">—</span>
         )}
       </div>
-      {kpi && <TrendChip trend={trend} kpiId={kpiId} higherIsBetterMap={higherIsBetterMap} />}
+      {kpi && !hideTrend && <TrendChip trend={trend} kpiId={kpiId} higherIsBetterMap={higherIsBetterMap} />}
       {kpi && <div className="summary-kpi-label">{kpi.label}</div>}
+      {!hideTrend && (
+        <LimitBadge value={value} limit={limit} higherIsBetter={kpiId && higherIsBetterMap[kpiId]} unit={unit} tooltipAlign={tooltipAlign} />
+      )}
     </button>
   );
 }
@@ -130,9 +160,18 @@ export default function SummaryPage() {
   const [sasbKpis, setSasbKpis] = useState([]);
   const [brsrKpis, setBrsrKpis] = useState([]);
   const [loading,  setLoading]  = useState(false);
+  // limits: { [kpi_id]: { threshold, baseline_default, is_override } } from
+  // /api/limits - a single global per-KPI config, not filtered, so it's
+  // fetched once on mount rather than re-fetched per filter change.
+  const [limits, setLimits] = useState({});
 
   useEffect(() => {
     api.getFilters('water').then(setFilterOptions).catch(() => {});
+    api.getLimits().then((data) => {
+      const byId = {};
+      (data.kpis || []).forEach((k) => { byId[k.id] = k; });
+      setLimits(byId);
+    }).catch(() => {});
   }, []);
 
   const fetchKpis = useCallback(() => {
@@ -169,6 +208,9 @@ export default function SummaryPage() {
   const kpiLookupByFramework = { GRI: kpiLookup, SASB: sasbKpiLookup, BRSR: brsrKpiLookup };
   const activeFilters = framework === 'BRSR' ? brsrFilters : framework === 'SASB' ? sasbFilters : griFilters;
   const updateActiveFilter = framework === 'BRSR' ? updateBrsrFilter : framework === 'SASB' ? updateSasbFilter : updateGriFilter;
+  // BRSR's selector is always a specific FY (no "all" option), so the YoY
+  // chip only needs hiding for GRI/SASB when "All Years" is selected.
+  const hideTrend = framework !== 'BRSR' && activeFilters.year === 'all';
 
   return (
     <div className="summary-page">
@@ -244,7 +286,7 @@ export default function SummaryPage() {
           <section key={pillar} className="summary-domain-section">
             <h2 className="summary-domain-heading">{label}</h2>
             <div className="summary-card-grid">
-              {visibleDomains.map((d) => {
+              {visibleDomains.map((d, index) => {
                 const resolvedKpiId = d.kpiId[framework];
                 const kpi = kpiLookupByFramework[framework][resolvedKpiId] || null;
                 return (
@@ -257,6 +299,9 @@ export default function SummaryPage() {
                     iconColorMap={ICON_COLOR_MAP[framework]}
                     higherIsBetterMap={HIGHER_IS_BETTER_MAP[framework]}
                     onClick={() => navigate(`/dashboards/${pillar}/${d.id}`)}
+                    limit={limits[resolvedKpiId]}
+                    hideTrend={hideTrend}
+                    tooltipAlign={index === 0 ? 'left' : index === visibleDomains.length - 1 ? 'right' : undefined}
                   />
                 );
               })}
@@ -271,7 +316,7 @@ export default function SummaryPage() {
         <section className="summary-domain-section">
           <h2 className="summary-domain-heading">Governance</h2>
           <div className="summary-card-grid">
-            {GOVERNANCE_DOMAINS.map((d) => (
+            {GOVERNANCE_DOMAINS.map((d, index) => (
               <DomainCard
                 key={d.id}
                 domainMeta={d}
@@ -281,6 +326,8 @@ export default function SummaryPage() {
                 iconColorMap={BRSR_ICON_COLORS}
                 higherIsBetterMap={BRSR_HIGHER_IS_BETTER}
                 onClick={() => navigate(`/dashboards/governance/${d.id}`)}
+                limit={limits[d.kpiId]}
+                tooltipAlign={index === 0 ? 'left' : index === GOVERNANCE_DOMAINS.length - 1 ? 'right' : undefined}
               />
             ))}
           </div>

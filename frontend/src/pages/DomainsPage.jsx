@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { LayoutDashboard } from 'lucide-react';
 import { useAppContext, SUBTAB_DOMAIN } from '../context/AppContext.jsx';
@@ -9,23 +9,12 @@ import {
   BRSR_KPI_GROUPS, BRSR_KPI_ICONS, BRSR_HIGHER_IS_BETTER, BRSR_ICON_COLORS, BRSR_SUBTAB_DOMAIN,
 } from '../constants/kpiGroups.js';
 import { DOMAIN_FRAMEWORK_MAP, NAV_TREE, SUBTAB_META } from '../constants/domainMap.js';
-import KpiCard, { KPI_TO_CORR_METRIC } from '../components/kpi/KpiCard.jsx';
+import KpiCard from '../components/kpi/KpiCard.jsx';
 import FilterBar from '../components/layout/FilterBar.jsx';
 import FrameworkToggle from '../components/layout/FrameworkToggle.jsx';
 import InsightsPanel from '../components/shared/InsightsPanel.jsx';
 import OutlierPanel from '../components/shared/OutlierPanel.jsx';
 import ProcessSafetyCharts from '../components/sasb/ProcessSafetyCharts.jsx';
-
-// Maps each GRI domain nav id → the correlation metric IDs whose top correlator
-// should be prefetched for that domain's KPI cards. Only GRI mode fetches
-// correlations (datasets are GRI-indexed); SASB/BRSR cards show no chip.
-const DOMAIN_CORR_METRICS = {
-  water:     ['water_withdrawn', 'water_consumed'],
-  waste:     ['waste_generated'],
-  energy:    ['energy_consumed'],
-  ghg:       ['scope1_ghg'],
-  safety:    ['safety_incidents'],
-};
 
 // Single shared route component for /dashboards/:pillar/:domain.
 export default function DomainsPage() {
@@ -38,8 +27,10 @@ export default function DomainsPage() {
   } = useAppContext();
 
   const [brsrKpis, setBrsrKpis] = useState([]);
-  // correlations: { [corr_metric_id]: [{metric_id, label, r, direction, ...}, ...] }
-  const [correlations, setCorrelations] = useState({});
+  // limits: { [kpi_id]: { threshold, baseline_default, is_override } } from
+  // /api/limits - a single global per-KPI config, not filtered, so it's
+  // fetched once on mount rather than re-fetched per filter change.
+  const [limits, setLimits] = useState({});
 
   const isGovernance = pillar === 'governance';
   const effectiveFramework = isGovernance ? 'BRSR' : framework;
@@ -62,28 +53,13 @@ export default function DomainsPage() {
     if (subTabId) ensureFilterOptions(subTabId);
   }, [subTabId, ensureFilterOptions]);
 
-  // Fetch correlations for the current domain's GRI KPI cards once per domain
-  // visit (only in GRI mode — SASB/BRSR datasets aren't in CORR_METRICS).
-  const fetchCorrelations = useCallback(() => {
-    if (effectiveFramework !== 'GRI' || isGovernance) return;
-    const metricIds = DOMAIN_CORR_METRICS[domain] || [];
-    if (!metricIds.length) return;
-    const plant = griFilters.plant !== 'all' ? griFilters.plant : undefined;
-    metricIds.forEach((mid) => {
-      api.getKpiCorrelations(mid, plant ? { plant } : {})
-        .then((data) => {
-          setCorrelations((prev) => ({ ...prev, [mid]: data.correlations || [] }));
-        })
-        .catch(() => {});
-    });
-  }, [effectiveFramework, isGovernance, domain, griFilters.plant]);
-
-  useEffect(() => { fetchCorrelations(); }, [fetchCorrelations]);
-
-  // Clear correlations when switching framework away from GRI.
   useEffect(() => {
-    if (effectiveFramework !== 'GRI') setCorrelations({});
-  }, [effectiveFramework]);
+    api.getLimits().then((data) => {
+      const byId = {};
+      (data.kpis || []).forEach((k) => { byId[k.id] = k; });
+      setLimits(byId);
+    }).catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (pillar !== 'environment' || effectiveFramework !== 'GRI') return;
@@ -164,16 +140,17 @@ export default function DomainsPage() {
           <div key={id} style={{ display: isActive ? 'block' : 'none' }}>
             <FilterBar subTab={id} icon={icon} label={label} />
             {panelDomain && <InsightsPanel domain={panelDomain} filters={panelFilters} />}
-            {panelDomain && <OutlierPanel domain={panelDomain} filters={panelFilters} />}
             <div className="kpi-row">
-              {filteredKpis.map((kpi) => (
+              {filteredKpis.map((kpi, index) => (
                 <KpiCard
                   key={kpi.id}
                   {...kpi}
                   Icon={icons[kpi.id]}
                   iconColor={iconColors[kpi.id]}
                   higherIsBetter={higherBetter[kpi.id]}
-                  correlations={(!isSasbTab && !isBrsrTab) ? correlations : undefined}
+                  hideTrend={!isBrsrTab && panelFilters.year === 'all'}
+                  tooltipAlign={index === 0 ? 'left' : index === filteredKpis.length - 1 ? 'right' : undefined}
+                  limit={limits[kpi.id]}
                 />
               ))}
             </div>
@@ -185,6 +162,8 @@ export default function DomainsPage() {
                 <ProcessSafetyCharts />
               </>
             )}
+
+            {panelDomain && <OutlierPanel domain={panelDomain} filters={panelFilters} />}
           </div>
         );
       })}

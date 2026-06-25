@@ -81,6 +81,18 @@ def init_db():
                 updated_at REAL NOT NULL
             )
         """)
+        # Per-KPI numeric threshold overrides (Limits feature). Default
+        # threshold (when no row exists for a kpi_id) is computed on the fly
+        # from the data itself (average across all reporting years) - see
+        # main.py's _compute_kpi_baselines(). Only admin-set overrides live here.
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS kpi_limits (
+                kpi_id TEXT PRIMARY KEY,
+                threshold REAL NOT NULL,
+                updated_by TEXT,
+                updated_at REAL
+            )
+        """)
         conn.commit()
 
 
@@ -273,3 +285,35 @@ def list_alert_acks():
     with _connect() as conn:
         rows = conn.execute("SELECT * FROM alert_acks").fetchall()
     return {r["alert_id"]: dict(r) for r in rows}
+
+
+# ─── KPI limit thresholds ────────────────────────────────────────────────────
+
+def get_kpi_limit_overrides():
+    """Returns admin-set threshold overrides, keyed by kpi_id. KPIs with no
+    row here fall back to their computed baseline average (see main.py's
+    _compute_kpi_baselines())."""
+    with _connect() as conn:
+        rows = conn.execute("SELECT kpi_id, threshold FROM kpi_limits").fetchall()
+    return {r["kpi_id"]: r["threshold"] for r in rows}
+
+
+def save_kpi_limits(updates: dict, updated_by: str = "admin"):
+    """Upserts each kpi_id: threshold pair. A None threshold deletes that
+    row instead (resets the KPI back to its computed default)."""
+    now = time.time()
+    with _connect() as conn:
+        for kpi_id, threshold in updates.items():
+            if threshold is None:
+                conn.execute("DELETE FROM kpi_limits WHERE kpi_id = ?", (kpi_id,))
+            else:
+                conn.execute("""
+                    INSERT INTO kpi_limits (kpi_id, threshold, updated_by, updated_at)
+                    VALUES (?, ?, ?, ?)
+                    ON CONFLICT(kpi_id) DO UPDATE
+                    SET threshold = excluded.threshold,
+                        updated_by = excluded.updated_by,
+                        updated_at = excluded.updated_at
+                """, (kpi_id, threshold, updated_by, now))
+        conn.commit()
+    return get_kpi_limit_overrides()

@@ -388,8 +388,13 @@ def _build_p8_csr(df_csr, all_fys):
 def generate_brsr_pdf(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
                       load_energy_fn, load_ghg_fn, load_water_fn,
                       load_waste_fn, load_safety_fn,
-                      load_workforce_fn=None, load_training_fn=None, load_csr_fn=None):
-    """Generate a BRSR Essential-indicators PDF. Returns BytesIO."""
+                      load_workforce_fn=None, load_training_fn=None, load_csr_fn=None,
+                      principles=None):
+    """Generate a BRSR Essential-indicators PDF. Returns BytesIO.
+
+    principles: optional list of BRSR_REPORT_TEMPLATES ids (main.py) to
+    restrict Section C to - None/empty means every principle (default)."""
+    include = lambda key: not principles or key in principles
     cfg = _load_config()
     buf = io.BytesIO()
     fy_label = fy or 'Full Dataset'
@@ -454,36 +459,39 @@ def generate_brsr_pdf(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
     story.append(_gap(8))
 
     # P6 Environment (live data)
-    if fy_years:
-        story += _build_p6_energy(df_e, fy_years)
-        story += _build_p6_water(df_w, fy_years)
-        story += _build_p6_ghg(df_g, fy_years)
-        story += _build_p6_waste(df_ws, fy_years)
-    else:
-        story += _placeholder_section('P6', 'Environment', 'No energy/GHG/water/waste records found for the selected FY window.')
-
-    story.append(_gap(6))
+    if include('brsr_p6'):
+        if fy_years:
+            story += _build_p6_energy(df_e, fy_years)
+            story += _build_p6_water(df_w, fy_years)
+            story += _build_p6_ghg(df_g, fy_years)
+            story += _build_p6_waste(df_ws, fy_years)
+        else:
+            story += _placeholder_section('P6', 'Environment', 'No energy/GHG/water/waste records found for the selected FY window.')
+        story.append(_gap(6))
 
     # P3 Safety (live from GRI403)
-    if safety_years:
-        story += _build_p3_safety(df_s, safety_years)
-    else:
-        story += _placeholder_section('P3', 'Safety', 'No OHS records found for the selected FY window.')
-
-    story.append(_gap(6))
+    if include('brsr_p3_safety'):
+        if safety_years:
+            story += _build_p3_safety(df_s, safety_years)
+        else:
+            story += _placeholder_section('P3', 'Safety', 'No OHS records found for the selected FY window.')
+        story.append(_gap(6))
 
     # P3 Workforce & Training (live from BRSR datasets)
-    story += _build_p3_workforce(df_wf, report_fys)
-    story.append(_gap(6))
-    story += _build_p3_training(df_tr, report_fys)
-    story.append(_gap(6))
+    if include('brsr_p3_workforce'):
+        story += _build_p3_workforce(df_wf, report_fys)
+        story.append(_gap(6))
+        story += _build_p3_training(df_tr, report_fys)
+        story.append(_gap(6))
 
     # P8 CSR (live from BRSR CSR dataset)
-    story += _build_p8_csr(df_csr, report_fys)
-    story.append(_gap(6))
+    if include('brsr_p8'):
+        story += _build_p8_csr(df_csr, report_fys)
+        story.append(_gap(6))
 
-    story += _placeholder_section('P2/P4/P5/P7/P9', 'Remaining Principles',
-        'Data collection templates for P2/P4/P5/P7/P9 not yet established.')
+    if include('brsr_other'):
+        story += _placeholder_section('P2/P4/P5/P7/P9', 'Remaining Principles',
+            'Data collection templates for P2/P4/P5/P7/P9 not yet established.')
 
     story += _notes([
         'This report covers BRSR Essential indicators only (SEBI BRSR circular 2021).',
@@ -500,8 +508,14 @@ def generate_brsr_pdf(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
 def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
                         load_energy_fn, load_ghg_fn, load_water_fn,
                         load_waste_fn, load_safety_fn,
-                        load_workforce_fn=None, load_training_fn=None, load_csr_fn=None):
-    """Generate a BRSR disclosure Excel workbook (SEBI-format). Returns BytesIO."""
+                        load_workforce_fn=None, load_training_fn=None, load_csr_fn=None,
+                        principles=None):
+    """Generate a BRSR disclosure Excel workbook (SEBI-format). Returns BytesIO.
+
+    principles: optional list of BRSR_REPORT_TEMPLATES ids (main.py) to
+    restrict the principle-wise sheets to - None/empty means every principle
+    (default). Section A/B sheets always render, same as the PDF's front matter."""
+    include = lambda key: not principles or key in principles
     from openpyxl import Workbook
     from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
 
@@ -583,7 +597,7 @@ def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
     add_sheet('Section B — Policies', b_rows)
 
     # Sheet: P6 Energy
-    if fy_years:
+    if include('brsr_p6') and fy_years:
         e_rows = [['Metric', 'Unit'] + [str(y) for y in fy_years]]
         for label, col in [('Total Energy Consumed', 'TotalEnergyConsumedGJ'),
                            ('Electricity — Renewables', 'ElectricityRenewableGJ'),
@@ -626,7 +640,7 @@ def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
         add_sheet('P6 Waste', ws_rows)
 
     # Sheet: P3 Safety — use correct GRI403 column aliases
-    if safety_years:
+    if include('brsr_p3_safety') and safety_years:
         _h   = 'HoursWorked' if 'HoursWorked' in df_s.columns else 'TotalHoursWorked'
         _rec = 'RecordableInjuries' if 'RecordableInjuries' in df_s.columns else 'TotalRecordableIncidents'
         _fat = 'FatalitiesInjury' if 'FatalitiesInjury' in df_s.columns else 'Fatalities'
@@ -648,7 +662,7 @@ def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
         add_sheet('P3 Safety', s_rows)
 
     # Sheet: P3 Workforce
-    if df_wf is not None and len(df_wf) > 0:
+    if include('brsr_p3_workforce') and df_wf is not None and len(df_wf) > 0:
         wf_cols = [
             ('Permanent Male', 'PermanentMale', 'count'),
             ('Permanent Female', 'PermanentFemale', 'count'),
@@ -680,7 +694,7 @@ def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
         add_sheet('P3 Workforce', wf_rows)
 
     # Sheet: P3 Training
-    if df_tr is not None and len(df_tr) > 0:
+    if include('brsr_p3_workforce') and df_tr is not None and len(df_tr) > 0:
         tr_cols = [
             ('Avg Training Hrs / Employee', 'AvgTrainingHrsAllEmployees', 'hrs'),
             ('Avg Hrs (Male)', 'AvgTrainingHrsPerEmployeeMale', 'hrs'),
@@ -699,7 +713,7 @@ def generate_brsr_excel(fy, plant, filter_by_fy_fn, filter_annual_by_fy_fn,
         add_sheet('P3 Training', tr_rows)
 
     # Sheet: P8 CSR
-    if df_csr is not None and len(df_csr) > 0:
+    if include('brsr_p8') and df_csr is not None and len(df_csr) > 0:
         csr_rows = [['Metric', 'Unit'] + report_fys]
         for label, col in [('CSR Obligation (₹ Cr)', 'ObligationCrore'),
                            ('CSR Expenditure (₹ Cr)', 'TotalSpentCrore'),

@@ -1,55 +1,38 @@
 import React from 'react';
-import { ArrowUp, ArrowDown, Minus, GitBranch } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import { formatKpiValue } from '../../utils/formatNumber.js';
 
-// KPI metric ID → backend correlation metric ID mapping.
-// Only GRI metrics that have matching backend CORR_METRICS entries are included.
-// SASB/BRSR KPI IDs are intentionally omitted — correlation runs on GRI datasets only.
-const KPI_TO_CORR_METRIC = {
-  'water-withdrawn':   'water_withdrawn',
-  'water-consumed':    'water_consumed',
-  'energy-consumed':   'energy_consumed',
-  'total-ghg':         'scope1_ghg',
-  'scope1-ghg':        'scope1_ghg',
-  'waste-generated':   'waste_generated',
-  'work-injuries':     'safety_incidents',
-  'ltifr':             'safety_incidents',
-  'trir':              'safety_incidents',
-};
+// limit: this card's own entry from /api/limits (passed by DomainsPage.jsx,
+// looked up by KPI id) - { threshold, baseline_default }. higherIsBetter
+// flips the breach direction: for "higher is better" KPIs (renewable %,
+// diversion rate, etc.) breaching means falling BELOW the threshold instead
+// of going above it.
+function LimitBadge({ value, limit, higherIsBetter, unit, tooltipAlign }) {
+  if (!limit || value === null || value === undefined) return null;
+  const { threshold, baseline_default } = limit;
+  if (threshold === null || threshold === undefined) return null;
 
-// Abbreviate long metric labels for the compact chip.
-function shortLabel(label) {
-  return label
-    .replace('Water Withdrawn', 'Water Withdrawn')
-    .replace('Energy Consumed', 'Energy')
-    .replace('Scope 1 GHG', 'GHG')
-    .replace('Waste Generated', 'Waste')
-    .replace('Recordable Injuries', 'Injuries')
-    .replace('Water Consumed', 'Water Consumed')
-    .replace(/\s*\(.*?\)/, ''); // strip parenthetical units for brevity
-}
+  const isMinimum = higherIsBetter === true;
+  const breached  = isMinimum ? value < threshold : value > threshold;
+  const text      = breached ? (isMinimum ? 'Below Minimum' : 'Exceeds Limit') : 'Within Limit';
+  const alignClass = tooltipAlign ? ` tooltip-align-${tooltipAlign}` : '';
+  const tooltip = `Threshold: ${formatKpiValue(threshold)}${unit ? ` ${unit}` : ''}\nBaseline avg (all years): ${formatKpiValue(baseline_default)}${unit ? ` ${unit}` : ''}`;
 
-function CorrChip({ corr }) {
-  if (!corr) return null;
-  const rColor = Math.abs(corr.r) >= 0.7 ? 'var(--accent-green)' : Math.abs(corr.r) >= 0.4 ? 'var(--accent-amber)' : 'var(--text-muted)';
-  const dirArrow = corr.direction === 'positive' ? '↑' : '↓';
-  const tooltip = `${corr.strength} ${corr.direction} correlation with ${corr.label}\nr = ${corr.r} (n=${corr.n})${corr.significant ? ' ✓ significant' : ''}`;
   return (
-    <span
-      className="kpi-corr-chip"
+    <Link
+      to="/limits"
+      className={`kpi-limit-chip ${breached ? 'kpi-limit-chip--breach' : 'kpi-limit-chip--ok'}${alignClass}`}
       data-tooltip={tooltip}
-      style={{ '--corr-color': rColor }}
     >
-      <GitBranch size={9} />
-      {shortLabel(corr.label)} r={corr.r} {dirArrow}
-    </span>
+      {text}
+    </Link>
   );
 }
 
-// correlations: array from /api/kpi-correlations/{kpi_id} for this card's metric.
-// correlationsKey: the KPI id used to look up the correlation metric (e.g. 'water-withdrawn').
-export default function KpiCard({ id, label, value, unit, trend, status, Icon, iconColor, higherIsBetter, correlations }) {
+export default function KpiCard({ id, label, value, unit, trend, status, Icon, iconColor, higherIsBetter, limit, hideTrend, tooltipAlign, gri, sasb, principle }) {
   const isPlaceholder = status === 'placeholder';
+  const standardCode = gri || sasb || (principle ? `BRSR ${principle}` : null);
   const displayValue  = isPlaceholder || value === null || value === undefined
     ? '—'
     : formatKpiValue(value);
@@ -74,14 +57,9 @@ export default function KpiCard({ id, label, value, unit, trend, status, Icon, i
 
   const iconStyle = { color: iconColor || 'var(--accent)' };
 
-  // Show the strongest significant correlation for this KPI, if available.
-  const corrMetricId = id ? KPI_TO_CORR_METRIC[id] : null;
-  const topCorr = correlations && corrMetricId
-    ? (correlations[corrMetricId]?.[0] || null)
-    : null;
-
   return (
     <div className={`kpi-card ${isPlaceholder ? 'placeholder' : ''}`}>
+      {standardCode && <span className="kpi-standard-badge">{standardCode}</span>}
       {Icon && (
         <div className="kpi-icon-wrap" style={{ '--kpi-icon-color': iconColor || 'var(--accent)' }}>
           <Icon size={30} style={iconStyle} />
@@ -97,7 +75,7 @@ export default function KpiCard({ id, label, value, unit, trend, status, Icon, i
 
       {isPlaceholder && <div className="kpi-awaiting">Awaiting data</div>}
 
-      {!isPlaceholder && (
+      {!isPlaceholder && !hideTrend && (
         <span className={`trend-chip ${trendClass}`}>
           {trendAbs !== null ? (
             <>
@@ -111,9 +89,9 @@ export default function KpiCard({ id, label, value, unit, trend, status, Icon, i
         </span>
       )}
 
-      {!isPlaceholder && topCorr && <CorrChip corr={topCorr} />}
+      {!isPlaceholder && !hideTrend && (
+        <LimitBadge value={value} limit={limit} higherIsBetter={higherIsBetter} unit={unit} tooltipAlign={tooltipAlign} />
+      )}
     </div>
   );
 }
-
-export { KPI_TO_CORR_METRIC };

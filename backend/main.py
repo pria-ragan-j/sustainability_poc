@@ -2014,14 +2014,19 @@ class BrsrReportRequest(BaseModel):
     fy: Optional[str] = None
     plant: Optional[str] = None
     format: Optional[str] = "pdf"
+    # Selected BRSR_REPORT_TEMPLATES ids - None/empty means every principle
+    # (preserves the original "covers all 9 Principles" default behavior).
+    principles: Optional[list] = None
 
 
 @app.post("/api/brsr/reports/generate")
 def generate_brsr_report(req: BrsrReportRequest):
-    """Generate a BRSR disclosure report (PDF or Excel) covering all 9 Principles."""
+    """Generate a BRSR disclosure report (PDF or Excel), scoped to the
+    selected principles (or all 9 if none specified)."""
     common_kwargs = dict(
         fy=req.fy,
         plant=req.plant,
+        principles=req.principles,
         filter_by_fy_fn=filter_by_fy,
         filter_annual_by_fy_fn=filter_annual_by_fy,
         load_energy_fn=load_energy_data,
@@ -2590,6 +2595,96 @@ def get_emissions_insights(year: Optional[int] = None, plant: Optional[str] = No
 
     return {"insights": insights[:3]}
 
+@app.get("/api/insights/workforce")
+def get_workforce_insights(year: Optional[int] = None, fy: Optional[str] = None,
+                            plant: Optional[str] = None, region: Optional[str] = None):
+    wfdf_all = safe_filter_region(safe_filter_plant(load_workforce_data(), plant), region)
+    target_fy = fy or (_fy_str(year) if year else None)
+    if not target_fy and len(wfdf_all):
+        target_fy = _fy_str(int(wfdf_all["StartYear"].max()))
+
+    wf = filter_annual_by_fy(wfdf_all, target_fy) if target_fy else wfdf_all
+    try:
+        prev_fy = _fy_str(int(target_fy[2:6]) - 1) if target_fy else None
+    except ValueError:
+        prev_fy = None
+    wf_prev = filter_annual_by_fy(wfdf_all, prev_fy) if prev_fy else wfdf_all.iloc[:0]
+
+    snap = _workforce_snapshot(wf)
+    snap_prev = _workforce_snapshot(wf_prev)
+    period_label = target_fy or "the selected period"
+
+    insights = []
+    if snap:
+        if snap_prev:
+            change = round(snap["turnover_rate"] - snap_prev["turnover_rate"], 1)
+            direction = "up" if change >= 0 else "down"
+            insights.append(f"Workforce turnover in {period_label} is **{abs(change)}pp {direction}** vs {prev_fy}, at **{snap['turnover_rate']}%** of **{snap['employees']:,}** employees.")
+        else:
+            insights.append(f"Workforce turnover in {period_label} stands at **{snap['turnover_rate']}%** of **{snap['employees']:,}** employees.")
+        insights.append(f"**{snap['female_pct']}%** of the workforce is female, with a new-hire rate of **{snap['new_hire_rate']}%**.")
+    else:
+        insights.append("No workforce data available for the selected filters.")
+
+    by_plant = {}
+    if len(wf):
+        for p, g in wf.groupby("PlantName"):
+            s = _workforce_snapshot(g)
+            if s:
+                by_plant[p] = s["turnover_rate"]
+    if len(by_plant) > 1:
+        worst = max(by_plant, key=by_plant.get)
+        best = min(by_plant, key=by_plant.get)
+        insights.append(f"**{worst}** has the highest turnover at **{by_plant[worst]}%**, while **{best}** has the lowest at **{by_plant[best]}%**.")
+    elif len(by_plant) == 1:
+        p = next(iter(by_plant))
+        insights.append(f"**{p}** is the only plant in this view, with turnover at **{by_plant[p]}%**.")
+    else:
+        insights.append("No plant-level workforce data available for the selected filters.")
+
+    return {"insights": insights[:3]}
+
+@app.get("/api/insights/csr")
+def get_csr_insights(year: Optional[int] = None, fy: Optional[str] = None,
+                      plant: Optional[str] = None, region: Optional[str] = None):
+    csrdf_all = load_csr_data()
+    target_fy = fy or (_fy_str(year) if year else None)
+    row = csrdf_all[csrdf_all["FY"] == target_fy] if target_fy else csrdf_all.tail(1)
+    if len(row) == 0:
+        row = csrdf_all.tail(1)
+    if not target_fy and len(row):
+        target_fy = row["FY"].iloc[0]
+
+    insights = []
+    if len(row):
+        obligation = round(float(row["ObligationCrore"].iloc[0]), 2)
+        spent = round(float(row["TotalSpentCrore"].iloc[0]), 2)
+        gap = round(obligation - spent, 2)
+        status = "missed" if gap > 0 else "met"
+        insights.append(f"CSR spend in {target_fy} was **₹{spent:,.2f} Cr** against an obligation of **₹{obligation:,.2f} Cr** — the obligation was **{status}** by **₹{abs(gap):,.2f} Cr**.")
+
+        try:
+            prev_fy = f"FY{int(target_fy[2:6]) - 1}-{str(int(target_fy[2:6]))[-2:]}"
+        except (ValueError, TypeError):
+            prev_fy = None
+        prev_row = csrdf_all[csrdf_all["FY"] == prev_fy] if prev_fy else csrdf_all.iloc[:0]
+        if len(prev_row):
+            prev_spent = round(float(prev_row["TotalSpentCrore"].iloc[0]), 2)
+            if prev_spent:
+                change = round((spent - prev_spent) / prev_spent * 100, 1)
+                direction = "up" if change >= 0 else "down"
+                insights.append(f"CSR spend is **{abs(change)}% {direction}** vs {prev_fy} (**₹{prev_spent:,.2f} Cr**).")
+
+        if "ProjectCategory" in row.columns and len(row) > 0:
+            by_cat = row.groupby("ProjectCategory")["SpentCrore"].sum().sort_values(ascending=False)
+            if len(by_cat):
+                insights.append(f"**{by_cat.index[0]}** received the largest share of CSR spend at **₹{round(float(by_cat.iloc[0]), 2):,.2f} Cr**.")
+    else:
+        insights.append("No CSR data available for the selected period.")
+
+    return {"insights": insights[:3]}
+
+
 # ─── OUTLIER DETECTION ───────────────────────────────────────────────────────
 # IQR-based year-over-year outlier detection per domain.
 # Returns up to 5 most significant anomalies with severity and a description.
@@ -3144,9 +3239,25 @@ SASB_REPORT_TEMPLATES = [
     {"id": "sasb_process_safety","name": "RT-CH-540 — Process Safety",            "sasb": "RT-CH-540a",      "hasData": False},
 ]
 
+# BRSR report templates - mirrors the 5 sequential sections generate_brsr_pdf/
+# generate_brsr_excel already build (brsr_report.py), so checking/unchecking
+# these maps directly onto the "principles" filter passed to those functions.
+BRSR_REPORT_TEMPLATES = [
+    {"id": "brsr_p6",           "name": "P6 — Environment",                          "principle": "P6",    "hasData": True},
+    {"id": "brsr_p3_safety",    "name": "P3 — Safety",                               "principle": "P3",    "hasData": True},
+    {"id": "brsr_p3_workforce", "name": "P3 — Workforce & Training",                 "principle": "P3",    "hasData": True},
+    {"id": "brsr_p8",           "name": "P8 — CSR",                                  "principle": "P8",    "hasData": True},
+    {"id": "brsr_other",        "name": "P1/P2/P4/P5/P7/P9 — Remaining Principles",  "principle": "Other", "hasData": False},
+]
+
 @app.get("/api/reports/templates")
 def get_report_templates(framework: Optional[str] = "GRI"):
-    return SASB_REPORT_TEMPLATES if (framework or "GRI").upper() == "SASB" else REPORT_TEMPLATES
+    fw = (framework or "GRI").upper()
+    if fw == "SASB":
+        return SASB_REPORT_TEMPLATES
+    if fw == "BRSR":
+        return BRSR_REPORT_TEMPLATES
+    return REPORT_TEMPLATES
 
 class ReportRequest(BaseModel):
     templates: list
@@ -4243,224 +4354,99 @@ def reset_alert_config(domain: str):
     return {"ok": True}
 
 
-# ─── CORRELATION ANALYSIS ────────────────────────────────────────────────────
-# Cross-domain Pearson/Spearman correlation endpoints powering the KPI card
-# correlation chips. Only GRI datasets are included (water, energy, ghg, waste,
-# safety all share the Plant × Year index needed for a clean join).
+# ─── LIMITS ───────────────────────────────────────────────────────────────────
+# Per-KPI numeric thresholds. Default threshold = average of that KPI's value
+# across every reporting year/FY already in the data; an admin can override
+# any KPI via storage.kpi_limits. Every KPI card compares its current value
+# against this threshold to show a "Within Limit"/"Exceeds Limit" badge.
 
-CORR_METRICS = {
-    "water_withdrawn":  {
-        "loader": load_water_data, "year_col": "ReportingYear",
-        "value_col": "TotalWaterWithdrawn", "scale": 1/1000, "label": "Water Withdrawn (ML)",
-    },
-    "water_consumed": {
-        "loader": load_water_data, "year_col": "ReportingYear",
-        "value_col": "WaterConsumed", "scale": 1/1000, "label": "Water Consumed (ML)",
-    },
-    "energy_consumed": {
-        "loader": load_energy_data, "year_col": "ReportingYear",
-        "value_col": "TotalEnergyConsumedGJ", "scale": 1, "label": "Energy Consumed (GJ)",
-    },
-    "scope1_ghg": {
-        "loader": load_ghg_data, "year_col": "ReportingYear",
-        "value_col": "Scope1TotaltCO2e", "scale": 1, "label": "Scope 1 GHG (tCO₂e)",
-    },
-    "waste_generated": {
-        "loader": load_waste_data, "year_col": "FiscalReportingPeriod",
-        "value_col": "__waste_generated__", "scale": 1, "label": "Waste Generated (t)",
-    },
-    "safety_incidents": {
-        "loader": load_safety_data, "year_col": "FiscalReportingPeriod",
-        "value_col": "RecordableInjuries", "scale": 1, "label": "Recordable Injuries",
-    },
-}
+# Same FY list the BRSR filter dropdown offers (AppContext.jsx's
+# BRSR_FY_OPTIONS) - used as the candidate set when averaging BRSR KPIs
+# across years; FYs with no underlying data simply contribute nothing.
+_BRSR_FY_OPTIONS = ["FY2019-20", "FY2020-21", "FY2021-22", "FY2022-23", "FY2023-24", "FY2024-25"]
 
 
-def _get_metric_series(metric_id: str, plant: Optional[str] = None):
-    """Returns (DataFrame with year/PlantName/value columns, label) or None."""
-    cfg = CORR_METRICS.get(metric_id)
-    if cfg is None:
-        return None
-    try:
-        df = safe_filter_plant(cfg["loader"](), plant)
-        if cfg["value_col"] == "__waste_generated__":
-            agg = (df.groupby([cfg["year_col"], "PlantName"])["ValueNumber"]
-                     .sum().reset_index()
-                     .rename(columns={cfg["year_col"]: "year", "ValueNumber": "value"}))
-        else:
-            agg = (df.groupby([cfg["year_col"], "PlantName"])[cfg["value_col"]]
-                     .sum().reset_index()
-                     .rename(columns={cfg["year_col"]: "year", cfg["value_col"]: "value"}))
-        agg["value"] = agg["value"] * cfg["scale"]
-        return agg, cfg["label"]
-    except Exception:
-        return None
+def _compute_kpi_baselines():
+    """Averages each KPI's value across every reporting year/FY already in
+    the data, by calling the same KPI endpoint functions the dashboard cards
+    use - guarantees the baseline matches what's actually displayed on
+    screen, with zero duplicated aggregation logic. Returns {kpi_id: {label,
+    unit, baseline_default}}."""
+    values_by_id = {}
+    meta_by_id = {}
 
-
-@app.get("/api/kpi-correlations/{kpi_id}")
-def get_kpi_correlations(kpi_id: str, plant: Optional[str] = None):
-    """Returns top correlating metrics for a given KPI metric ID.
-    Designed for KPI card inline correlation chips — one call per domain page load."""
-    try:
-        from scipy import stats as _stats
-    except ImportError:
-        return {"correlations": [], "error": "scipy not installed on backend"}
-
-    base = _get_metric_series(kpi_id, plant if plant and plant != "all" else None)
-    if base is None:
-        return {"kpi_id": kpi_id, "correlations": []}
-
-    base_df, base_label = base
-    correlations = []
-    for other_id in CORR_METRICS:
-        if other_id == kpi_id:
-            continue
-        other = _get_metric_series(other_id, plant if plant and plant != "all" else None)
-        if other is None:
-            continue
-        other_df, other_label = other
-        merged = base_df.merge(other_df, on=["year", "PlantName"], suffixes=("_a", "_b"))
-        if len(merged) < 4:
-            continue
-        try:
-            r, p = _stats.pearsonr(merged["value_a"].values, merged["value_b"].values)
-            if np.isnan(r):
+    def collect(records):
+        for r in records or []:
+            if r.get("value") is None:
                 continue
-            correlations.append({
-                "metric_id": other_id,
-                "label": other_label,
-                "r": round(float(r), 3),
-                "p": round(float(p), 6),
-                "n": len(merged),
-                "significant": bool(float(p) < 0.05),
-                "strength": "strong" if abs(r) >= 0.7 else "moderate" if abs(r) >= 0.4 else "weak",
-                "direction": "positive" if r > 0 else "negative",
-            })
+            values_by_id.setdefault(r["id"], []).append(r["value"])
+            meta_by_id.setdefault(r["id"], {"label": r.get("label"), "unit": r.get("unit")})
+
+    try:
+        years = sorted(int(y) for y in load_water_data()["ReportingYear"].unique().tolist())
+    except Exception:
+        years = []
+
+    for y in years:
+        try:
+            collect(get_environment_kpis(year=y))
         except Exception:
-            continue
+            pass
+        try:
+            collect(get_social_kpis(year=y))
+        except Exception:
+            pass
+        try:
+            collect(get_sasb_kpis(year=y))
+        except Exception:
+            pass
 
-    correlations.sort(key=lambda x: -abs(x["r"]))
-    return {"kpi_id": kpi_id, "label": base_label, "correlations": correlations[:4]}
+    for fy in _BRSR_FY_OPTIONS:
+        try:
+            collect(get_brsr_kpis(fy=fy))
+        except Exception:
+            pass
 
-
-@app.get("/api/correlate")
-def get_correlation(
-    metric_x: str,
-    metric_y: str,
-    plant: Optional[str] = None,
-    year_from: Optional[int] = None,
-    year_to: Optional[int] = None,
-):
-    """Scatter-plot data + Pearson/Spearman stats for any two correlatable metrics."""
-    try:
-        from scipy import stats as _stats
-    except ImportError:
-        raise HTTPException(status_code=500, detail="scipy not installed. Run: pip install scipy")
-
-    p_arg = plant if plant and plant != "all" else None
-    res_x = _get_metric_series(metric_x, p_arg)
-    res_y = _get_metric_series(metric_y, p_arg)
-    if res_x is None or res_y is None:
-        raise HTTPException(status_code=400, detail="Unknown metric_x or metric_y")
-
-    df_x, label_x = res_x
-    df_y, label_y = res_y
-    merged = df_x.merge(df_y, on=["year", "PlantName"], suffixes=("_x", "_y"))
-    if year_from:
-        merged = merged[merged["year"] >= year_from]
-    if year_to:
-        merged = merged[merged["year"] <= year_to]
-
-    if len(merged) < 3:
-        return {
-            "metric_x": label_x, "metric_y": label_y,
-            "points": [], "pearson_r": None, "pearson_p": None, "spearman_r": None,
-            "regression": None, "n": len(merged),
-            "warning": "Not enough data points (minimum 3 required).",
+    return {
+        kpi_id: {
+            "label": meta_by_id[kpi_id]["label"],
+            "unit": meta_by_id[kpi_id]["unit"],
+            "baseline_default": round(sum(vals) / len(vals), 4),
         }
-
-    x_vals = merged["value_x"].values
-    y_vals = merged["value_y"].values
-    r, p = _stats.pearsonr(x_vals, y_vals)
-    sp_r, _ = _stats.spearmanr(x_vals, y_vals)
-    slope, intercept, r_val, _, _ = _stats.linregress(x_vals, y_vals)
-
-    abs_r = abs(float(r))
-    strength = "strong" if abs_r >= 0.7 else "moderate" if abs_r >= 0.4 else "weak"
-    direction = "positive" if r > 0 else "negative"
-    sig_text = "statistically significant (p<0.05)" if float(p) < 0.05 else "not statistically significant"
-    interpretation = (
-        f"{strength.capitalize()} {direction} correlation (r={round(float(r),3)}, p={round(float(p),4)}). "
-        f"{sig_text} across {len(merged)} plant-year observations."
-    )
-
-    points = [
-        {"label": f"{row['PlantName']} / {int(row['year'])}", "x": round(float(row["value_x"]), 3), "y": round(float(row["value_y"]), 3)}
-        for _, row in merged.iterrows()
-    ]
-    return {
-        "metric_x": label_x, "metric_y": label_y,
-        "points": points,
-        "pearson_r": round(float(r), 3),
-        "pearson_p": round(float(p), 6),
-        "spearman_r": round(float(sp_r), 3),
-        "regression": {"slope": round(float(slope), 6), "intercept": round(float(intercept), 3), "r_squared": round(float(r_val**2), 3)},
-        "n": len(merged),
-        "interpretation": interpretation,
+        for kpi_id, vals in values_by_id.items()
     }
 
 
-@app.get("/api/correlate/matrix")
-def get_correlation_matrix(
-    metrics: Optional[str] = None,
-    plant: Optional[str] = None,
-):
-    """Full Pearson correlation matrix across all (or a subset of) correlatable metrics."""
-    try:
-        from scipy import stats as _stats
-    except ImportError:
-        raise HTTPException(status_code=500, detail="scipy not installed")
+def _limits_payload():
+    baselines = _compute_kpi_baselines()
+    overrides = storage.get_kpi_limit_overrides()
+    kpis = []
+    for kpi_id, b in baselines.items():
+        is_override = kpi_id in overrides
+        kpis.append({
+            "id": kpi_id,
+            "label": b["label"],
+            "unit": b["unit"],
+            "baseline_default": b["baseline_default"],
+            "threshold": overrides[kpi_id] if is_override else b["baseline_default"],
+            "is_override": is_override,
+        })
+    return {"kpis": kpis}
 
-    metric_ids = [m.strip() for m in (metrics or ",".join(CORR_METRICS.keys())).split(",") if m.strip() in CORR_METRICS]
-    p_arg = plant if plant and plant != "all" else None
 
-    series_list = []
-    for mid in metric_ids:
-        result = _get_metric_series(mid, p_arg)
-        if result:
-            series_list.append((mid, result[0], result[1]))
+@app.get("/api/limits")
+def get_limits():
+    return _limits_payload()
 
-    if len(series_list) < 2:
-        return {"metrics": [s[2] for s in series_list], "metric_ids": [s[0] for s in series_list], "matrix": [], "p_values": [], "n": 0}
 
-    base = series_list[0][1].rename(columns={"value": series_list[0][0]})
-    for mid, df, _ in series_list[1:]:
-        base = base.merge(df.rename(columns={"value": mid}), on=["year", "PlantName"], how="inner")
+class LimitsUpdateRequest(BaseModel):
+    updates: dict
 
-    n = len(base)
-    matrix, p_matrix = [], []
-    for i, (mi, _, _) in enumerate(series_list):
-        row_r, row_p = [], []
-        for j, (mj, _, _) in enumerate(series_list):
-            if i == j:
-                row_r.append(1.0); row_p.append(0.0)
-            elif n >= 3:
-                try:
-                    r, p = _stats.pearsonr(base[mi].values, base[mj].values)
-                    row_r.append(round(float(r), 3)); row_p.append(round(float(p), 6))
-                except Exception:
-                    row_r.append(None); row_p.append(None)
-            else:
-                row_r.append(None); row_p.append(None)
-        matrix.append(row_r); p_matrix.append(row_p)
 
-    return {
-        "metrics": [s[2] for s in series_list],
-        "metric_ids": [s[0] for s in series_list],
-        "matrix": matrix,
-        "p_values": p_matrix,
-        "n": n,
-    }
+@app.put("/api/limits")
+def update_limits(req: LimitsUpdateRequest):
+    storage.save_kpi_limits(req.updates)
+    return _limits_payload()
 
 
 @app.get("/api/health")

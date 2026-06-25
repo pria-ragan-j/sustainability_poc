@@ -20,10 +20,11 @@ export default function ReportGeneratorPanel() {
 
   useEffect(() => {
     setSelected([]);
-    if (!isBrsr) {
-      api.getReportTemplates(framework).then(setTemplates).catch(() => {});
-    }
-  }, [framework, isBrsr]);
+    api.getReportTemplates(framework).then(setTemplates).catch(() => {});
+  }, [framework]);
+
+  const allSelected = templates.length > 0 && templates.every((t) => selected.includes(t.id));
+  const toggleSelectAll = () => setSelected(allSelected ? [] : templates.map((t) => t.id));
 
   const years = [...new Set(Object.values(filterOptionsByDomain).flatMap((d) => d.years || []))].sort((a, b) => b - a);
   const plants = [...new Set(Object.values(filterOptionsByDomain).flatMap((d) => d.plants || []))].sort();
@@ -33,8 +34,8 @@ export default function ReportGeneratorPanel() {
   };
 
   const handleGenerate = async () => {
-    if (!isBrsr && selected.length === 0) {
-      setError(`Select at least one ${framework === 'SASB' ? 'SASB topic' : 'GRI standard'}.`);
+    if (selected.length === 0) {
+      setError(`Select at least one ${framework === 'SASB' ? 'SASB topic' : framework === 'BRSR' ? 'BRSR principle' : 'GRI standard'}.`);
       return;
     }
     setError('');
@@ -79,27 +80,27 @@ export default function ReportGeneratorPanel() {
         </div>
       </div>
 
-      {/* BRSR: no template selection — report covers all 9 principles */}
-      {isBrsr ? (
-        <div className="report-brsr-note">
-          BRSR report covers all 9 Principles (Essential indicators). P6 Environment data
-          is live; P3 Workforce/Training and Governance data show placeholders until new
-          datasets are collected.
-        </div>
-      ) : (
-        <div>
-          <div className="report-section-label">{framework === 'SASB' ? 'SASB Topic' : 'GRI Standard'}</div>
-          <div className="report-template-list">
-            {templates.map((t) => (
-              <label key={t.id} className={`report-template-item ${t.hasData ? '' : 'no-data'}`}>
-                <input type="checkbox" checked={selected.includes(t.id)} onChange={() => toggleTemplate(t.id)} />
-                {t.name}
-                {!t.hasData && <span className="no-data-tag">No data — placeholder only</span>}
-              </label>
-            ))}
+      <div>
+        <div className="report-section-label-row">
+          <div className="report-section-label">
+            {framework === 'SASB' ? 'SASB Topic' : framework === 'BRSR' ? 'BRSR Principle' : 'GRI Standard'}
           </div>
+          {templates.length > 0 && (
+            <button type="button" className="report-select-all-btn" onClick={toggleSelectAll}>
+              {allSelected ? 'Clear All' : 'Select All'}
+            </button>
+          )}
         </div>
-      )}
+        <div className="report-template-list">
+          {templates.map((t) => (
+            <label key={t.id} className={`report-template-item ${t.hasData ? '' : 'no-data'}`}>
+              <input type="checkbox" checked={selected.includes(t.id)} onChange={() => toggleTemplate(t.id)} />
+              {t.name}
+              {!t.hasData && <span className="no-data-tag">No data — placeholder only</span>}
+            </label>
+          ))}
+        </div>
+      </div>
 
       <div>
         <div className="report-section-label">Reporting Period</div>

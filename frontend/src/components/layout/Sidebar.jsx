@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Leaf, Users, Building2, FileText, ChevronRight, ChevronsLeft, ChevronsRight,
-  LayoutDashboard, AlertTriangle, MessageSquare,
+  LayoutDashboard, AlertTriangle, MessageSquare, Gauge,
 } from 'lucide-react';
 import { useAppContext } from '../../context/AppContext.jsx';
 import { NAV_TREE, DOMAIN_STANDARD_CODE, DOMAIN_FRAMEWORK_MAP } from '../../constants/domainMap.js';
@@ -92,6 +92,11 @@ export default function Sidebar() {
         <NavLink to="/alerts" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active-section' : ''}`} title="Alerts / Anomaly Detection">
           <AlertTriangle size={16} />
           {!sidebarCollapsed && <span className="sidebar-label">Alerts</span>}
+        </NavLink>
+
+        <NavLink to="/limits" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active-section' : ''}`} title="Limits">
+          <Gauge size={16} />
+          {!sidebarCollapsed && <span className="sidebar-label">Limits</span>}
         </NavLink>
 
         <NavLink to="/reports" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active-section' : ''}`} title="Reports">

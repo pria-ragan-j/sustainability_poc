@@ -35,7 +35,9 @@ export default function InsightsPanel({ domain, filters }) {
       ) : (
         <ul className="insights-list">
           {insights.map((text, i) => (
-            <li key={i}><ReactMarkdown components={INLINE_MARKDOWN}>{text}</ReactMarkdown></li>
+            <li key={i}>
+              <ReactMarkdown components={INLINE_MARKDOWN}>{text}</ReactMarkdown>
+            </li>
           ))}
         </ul>
       )}

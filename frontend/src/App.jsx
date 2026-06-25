@@ -6,6 +6,7 @@ import LoginPage from './components/auth/LoginPage.jsx';
 import SummaryPage from './components/summary/SummaryPage.jsx';
 import DomainsPage from './pages/DomainsPage.jsx';
 import AlertsPage from './pages/AlertsPage.jsx';
+import LimitsPage from './pages/LimitsPage.jsx';
 import ReportsPage from './pages/ReportsPage.jsx';
 import ReportGeneratorPanel from './components/reports/ReportGeneratorPanel.jsx';
 import ReportLibraryPage from './components/reports/ReportLibraryPage.jsx';
@@ -46,6 +47,7 @@ export default function App() {
                 mount-once chart cache inside it survives the whole session. */}
             <Route path="dashboards/:pillar/:domain" element={<DomainsPage />} />
             <Route path="alerts" element={<AlertsPage />} />
+            <Route path="limits" element={<LimitsPage />} />
             <Route path="reports" element={<ReportsPage />}>
               <Route index element={<Navigate to="/reports/generate" replace />} />
               <Route path="generate" element={<ReportGeneratorPanel />} />
